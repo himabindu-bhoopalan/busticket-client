@@ -1,0 +1,45 @@
+<app-navbar-bus-op></app-navbar-bus-op>
+<div class="container">
+    <form [formGroup]="busForm" (submit)="sendData()">
+        <div class="col-lg-4">
+            <label for="">Bus operator</label>
+            <input type="text" formControlName="Bus_operator_id" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <label for="">Bus Name</label>
+            <input type="text" formControlName="Bus_Name" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <label for="">Date</label>
+            <input type="date" formControlName="Date" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <label for="">Departure</label>
+            <input type="time" formControlName="Departure" class="form-control">
+        </div>
+
+        <div class="col-lg-4">
+            <label for="">Arrival</label>
+            <input type="time" formControlName="Arrival" class="form-control">
+        </div>
+
+        <div class="col-lg-4">
+            <label for="">Source</label>
+            <input type="text" formControlName="Source" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <label for="">Destination</label>
+            <input type="text" formControlName="Destination" class="form-control">
+        </div>
+        <div class="col-lg-4">
+            <label for="">Price</label>
+            <input type="number" formControlName="Ticket_price" class="form-control">
+        </div>
+        <div class="col-lg-3">
+            <input type="submit" text='Add Bus' class="btn-btn-danger">
+        </div>
+
+    </form>
+</div>
+
+

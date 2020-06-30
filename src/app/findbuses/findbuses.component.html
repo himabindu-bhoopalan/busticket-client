@@ -1,0 +1,68 @@
+<app-navbar-user></app-navbar-user>
+<div class="container">
+    <form  class='form-group' [formGroup]="findForm" (submit)="findData()">
+        <div class="col-lg-10">
+          <span class='from'>
+            <label for="">From</label>
+            <input type="text" formControlName="Source" class="form-control">
+            <label for="">To</label>
+            <input type="text" formControlName="Destination" class="form-control">
+            <label for="">Date</label>
+            <input type="date" formControlName="Date" class="form-control">
+          </span> 
+          <div class="col-lg-3">
+            <input type="submit" value='Find Buses' class="btn btn-danger">
+        </div>
+        </div>
+       
+    </form>
+</div> 
+<div>
+  <i class="fa fa-map-marker" aria-hidden="true"></i>
+</div>  
+
+<div class="col-lg-8" *ngFor="let bus of bus_data">
+  <div class="card ">
+    <div class="card-header">
+      Featured
+    </div>
+    <div class="card-body">
+        <span class="location icons">
+          <ul>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </ul>
+        </span>
+        <!-- dep time, arr time, difference time -->
+        <span class="card-text dep-arr-diff">
+         
+          <ul>
+            <li>Departure time{{bus.Departure}}</li>
+            <li>Time duration{{bus.Departure}}-{{bus.Arrival}}</li>
+            <li>Arrival time{{bus.Arrival}}</li>
+          </ul>
+        </span>
+        <span class="title">
+          <h5 class="card-title">Bus Name {{bus.Bus_Name}}</h5>
+          <p class="card-text">Bus operator {{bus.Bus_operator_id}}</p> 
+        </span>
+        <!-- to add price ,seats left ,book seat-->
+        <span class="card-text price-seats-left">
+          <ul>
+            <li>
+              Price {{bus.Ticket_price}}
+            </li>
+            <li>
+              <a href="#" routerLink="/selectseats" class="btn btn-primary">SELECT SEATS</a>
+            </li>
+            <li>
+              Seats left {{this.count_seats}}
+            </li>
+        </ul>
+        </span>
+
+
+      </div>
+  </div>
+</div>
+ 

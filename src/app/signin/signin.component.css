@@ -26,6 +26,7 @@ body {
 
 .form-signin {
   width: 100%;
+
 }
 
 .form-signin .btn {
@@ -41,7 +42,10 @@ body {
   position: relative;
   margin-bottom: 1rem;
 }
-
+.form-group{
+  margin:10px 10px 10px 10px;
+  border-radius:30px;
+}
 .form-label-group input {
   height: auto;
   border-radius: 2rem;

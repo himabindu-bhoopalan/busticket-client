@@ -1,0 +1,26 @@
+.from{
+    display:flex;
+    margin: 131px -25px 31px -3px;
+}
+input.btn.btn-danger {
+    margin: 10px 10px 9px 400px;
+}
+.card{
+    margin:20px 20px 20px 20px;
+}
+ul{
+    list-style: none
+}
+i{
+    height:30px;
+    width: 30px;
+}
+.dep-arr-diff{
+   display:flex; 
+}
+.price-seats-left{
+    display:flex;
+}
+.title{
+    display:flex;
+}

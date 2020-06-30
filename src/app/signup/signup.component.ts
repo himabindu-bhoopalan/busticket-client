@@ -33,14 +33,17 @@ category:any=['User','Bus Operator']
     console.log(this.userForm.value);
     console.log(this.userForm.valid);
     if(this.userForm.valid){
-
+    
       this.user.usersignup(this.userForm.value).subscribe((data)=>{
-        console.log("inside sendData");
+        this.userData=data 
+        if(data.status==200){
+          // alert("please sign in with the credentials");
+          this.router.navigate["/"];
+        }
+        else if(data.status==400){
+          alert("error");
+        }
         
-        console.log(data);
-        this.userData=data  //what data should and will come back it should re-direct to user dashboard or sign in form
-        alert("please sign in with the credentials");
-        this.router.navigate["/"]
       })
 
     }

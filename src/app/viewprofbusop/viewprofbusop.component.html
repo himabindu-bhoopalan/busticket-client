@@ -1,0 +1,43 @@
+<app-navbar-bus-op></app-navbar-bus-op>
+<div class="row">
+    <div class="card" style="width: 36rem;">
+        <div class="card-body">
+            <h5 class="card-title">User Profile</h5>
+            <table class="table" [formGroup]="profileForm">
+                <tbody>
+                    <tr>
+                        
+                        <td>Id</td>
+                        <td>{{this.user_data.unique_id}}</td>
+
+                    </tr>
+                    <tr>
+                      
+                        <td>Name</td>
+                        <td>{{this.user_data.name}}</td>
+
+                    </tr>
+                    <tr>
+                        
+                        <td>Email</td>
+                        <td>{{this.user_data.email}}</td>
+
+                    </tr>
+                    <tr>
+                        
+                        <td>Phone</td>
+                        <td>{{this.user_data.phnumber}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Approval</td>
+                        <td>{{this.user_data.approval}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div>
+                <button type="button" (click)='update()' class="btn btn-danger">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
