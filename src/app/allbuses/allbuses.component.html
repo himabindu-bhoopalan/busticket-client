@@ -50,7 +50,7 @@
         <td>{{bus.Destination}}</td>
         <td>{{bus.Ticket_price}}</td>
         <td>{{bus.approval_status}}</td>
-        <td><button type="button" class="btn btn-dark">Approve</button></td>
+        <td><button type="button" class="btn btn-dark" (click)="approve(bus._id)">Approve</button></td>
       </tr>
     </tbody>
   </table>

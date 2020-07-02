@@ -51,4 +51,12 @@ export class BusticketService {
     console.log('bus op list service');
     return this.http.get('http://localhost:3040/allbusops');
   }
+  approvebus(obj){
+    console.log('inside put service ',obj);
+    return this.http.put('http://localhost:3040/busapproval',obj);
+  }
+  approvebusoperator(obj){
+    console.log('inside put service ',obj);
+    return this.http.put('http://localhost:3040/operatorapproval',obj);
+  }
 }

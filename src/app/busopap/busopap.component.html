@@ -43,7 +43,7 @@
         <td>{{busop.phnumber}}</td>
         <td>{{busop.unique_id}}</td>
         <td>{{busop.approval}}</td>
-        <td><button type="button" class="btn btn-success">Approve</button></td>
+        <td><button type="button" class="btn btn-success" (click)="approve(busop._id)">Approve</button></td>
       </tr>
     </tbody>
   </table>

@@ -1,48 +1,79 @@
 <nav class="navbar navbar-expand-lg " style="background-color: #f3073afa;">
   <a class="navbar-brand" href="#">BooKBuS</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-          <a class="nav-link" routerLink="/allusers" >All Users<span class="sr-only">(current)</span></a>
-        </li>
+        <a class="nav-link" routerLink="/allusers">All Users<span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item active">
         <a class="nav-link" routerLink="/allbuses">Bus Approvals</a>
       </li>
       <li class="nav-item">
-          <a class="nav-link" routerLink="/busopapproval" >Bus Operator Approvals</a>
-        </li>
+        <a class="nav-link" routerLink="/busopapproval">Bus Operator Approvals</a>
+      </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="/">Logout</a>
       </li>
     </ul>
-   
+
   </div>
 </nav>
 <p>allusers works!</p>
 
 <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Phone</th>
-        <th scope="col">ID</th>
-        <th scope="col">Tickets</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody >
-      <tr *ngFor="let user of userdata">
-        <td>{{user.name}}</td>
-        <td>{{user.email}}</td>
-        <td>{{user.phnumber}}</td>
-        <td>{{user.unique_id}}</td>
-        <td>{{user.tickets.length}}</td>
-        <td><button type="button" class="btn btn-dark">Delete</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">ID</th>
+      <th scope="col">Tickets</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of userdata;let j=index">
+      <td>{{user.name}}</td>
+      <td>{{user.email}}</td>
+      <td>{{user.phnumber}}</td>
+      <td>{{user.unique_id}}</td>
+      <td>{{user.tickets.length}}</td>
+      <td><button type="button" class="btn btn-dark" (click)="deleteUser(user._id)" data-toggle="modal"
+          data-target="#staticBackdrop">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Confirm Deletion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form class="form-modal" [formGroup]="delForm" (submit)="sendData()">
+        <div class="modal-body">
+          <div class="form-group">
+            <label for="reason">Specify the reason</label>
+          </div>
+          <div class="form-group">
+            <input class="form-modal" type="text" id='reason' formControlName='reason' name='reason'>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Delete">
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

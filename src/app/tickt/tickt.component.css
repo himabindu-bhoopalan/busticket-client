@@ -1,0 +1,45 @@
+.card-black{
+    background-color:rgb(117, 28, 28);
+    height:150px;
+   
+
+}
+.ticket-id{
+    color:white;
+    font-size: 20px;
+    font-weight: bold;
+    position: relative;
+    bottom: -108px;
+    margin-left: 20px;
+}
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* border-radius: 10%; */
+    height:500px;
+}
+.container{
+    display:flex;
+    justify-content:center;
+}
+.card-body{
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    position:relative;
+
+}
+.ticket-text-heading{
+   
+    color:grey;
+}
+.ticket-text-info{
+    color:rgb(48, 30, 30);
+    font-weight:bold;
+}
+h5{
+   position: center;
+   margin-left:60px;
+}
+.btn.btn-primary{
+    background-color:rgb(117, 28, 28);
+}

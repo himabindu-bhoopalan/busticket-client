@@ -8,6 +8,8 @@ import { BusticketService } from '../busticket.service';
 })
 export class AllbusesComponent implements OnInit {
 busdata
+data1
+
   constructor(private service:BusticketService) {
     this.service.buslist().subscribe((bus1)=>{
       console.log('inside userlist method'+bus1);
@@ -20,5 +22,22 @@ busdata
 
   ngOnInit(): void {
   }
-
+  approve(id){
+    var obj={_id:id}
+    
+    console.log(id);
+    this.service.approvebus(obj).subscribe((data)=>{
+      console.log('inside userlist method'+data);
+      this.data1=data
+      console.dir(this.data1);
+      if(this.data1.status==200){
+        console.log('updated');
+        alert('Approved!');
+      }
+      if(this.data1.status==400){
+        alert('Something went wrong ..Try again!');
+        
+      }
+    })
+  }
 }

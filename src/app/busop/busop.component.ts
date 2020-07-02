@@ -6,8 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./busop.component.css']
 })
 export class BusopComponent implements OnInit {
-
-  constructor() { }
+user;
+  constructor() {
+    this.user = sessionStorage.getItem('busopdata');
+   }
 
   ngOnInit(): void {
   }

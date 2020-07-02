@@ -1,0 +1,95 @@
+.jumbotron{
+    display:flex;
+    justify-content:center;
+    width:300px;
+    margin:100px;
+}
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+  /*   height:px; */
+    width:250px;
+    background-color:#F0F0F0;
+    margin:80px 10px 10px 100px;
+    
+  }
+  
+  .flex-container > div {
+    background-color: red;
+    width: 30px;
+    height:30px;
+    margin: 10px;
+    border-radius:20%;
+    text-align: center;
+  /*   line-height: 75px; */
+    font-size: 20px;
+    
+  }
+  .flex-container > div:hover{
+    background-color: yellow;
+  /*   width: 30px;
+    height:30px;
+    margin: 10px;
+    border-radius:20%;
+    text-align: center; */
+  /*   line-height: 75px; */
+    font-size: 20px;
+  }
+  #red{
+    background-color:red;
+  }
+  #green{
+    background-color:green;
+  }
+  #grey{
+    background-color:grey;
+  }
+  #text{
+    color:black;
+  }
+  .container2{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    width:250px;
+    margin:0px 10px 10px 95px;
+  }
+  .container3{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+  /*   border:20px solid 	#F0F0F0; */
+     position: relative;
+    background-color:	#F0F0F0;
+    border-radius:20%;
+    height:400px;
+    width:280px;
+    margin:10px 10px 10px 90px;
+  }
+  .seat{
+    height:40px;
+    width:40px;
+    background-color:red;
+    border-radius:20%;
+    margin:4px 0px 0px 3px;
+  }
+  .table1,.table2{
+    margin-top:100px;
+  /*   border:5px solid black; */
+  }
+  .steering{
+    height:30px;
+    width:30px;
+    margin-top:0px;
+   
+  }
+  .steerinclass{
+    display:flex;
+    justify-content:flex-end;
+    width:150px;
+    margin-top:30px;
+    background-color:#F0F0F0;
+  /*   border:3px solid black; */
+     position: absolute;
+  }
