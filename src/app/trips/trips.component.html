@@ -1,2 +1,183 @@
 <app-navbar-user></app-navbar-user>
-<p>trips works!</p>
+
+<!-- "ticketid" : "CheMad39266",
+"Bus_operator_id" : "sa12345",
+"Departure" : "19:20",
+"Arrival" : "21:10",
+"Total_price" : 1000,
+"Ticket_price" : 500,
+"Source" : "Chennai",
+"Destination" : "Madurai",
+"Date" : "2020-06-27",
+"Seats" : [
+        3,
+        5
+] -->
+<div class="container">
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+            Upcoming Trips
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample">
+        <div *ngFor="let ticket of upcomingTickets;let j=index;">
+        <div class="card card-body">
+            
+            <div class="card" style="width: 22rem;">
+                <div class="card-black">
+                    <div class="ticket-id"><span>TICKET ID-</span> {{ticket.ticketid}}</div>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ticket.Source}} <> {{ticket.Destination}}</h5> 
+                  <table>
+                      <tr>
+                        <th class='ticket-text-heading'>Seats Booked</th>
+                        <td class='ticket-text-info'>{{ticket.Seats}}</td>
+                      </tr>
+                      <tr>
+                        <th class='ticket-text-heading'>Bus Name</th>
+                        <td class='ticket-text-info'>{{ticket.busName}}</td>
+                      </tr>
+                      <tr>
+                        <th class='ticket-text-heading'>Price</th>
+                        <td class='ticket-text-info'>{{ticket.Total_price}}</td>
+                      </tr>
+                  </table>
+                  <table>
+                    <tr>
+                      <th class='ticket-text-heading'>Date</th>
+                      <td class='ticket-text-info'>{{ticket.Date}}</td>
+                    </tr>
+                    <tr>
+                      <th class='ticket-text-heading'>Departure</th>
+                      <td class='ticket-text-info'>{{ticket.Departure}}</td>
+                    </tr>
+                    <tr>
+                      <th class='ticket-text-heading'>Arrival</th>
+                      <td class='ticket-text-info'>{{ticket.Arrival}}</td>
+                    </tr>
+                    <tr>
+                      <th>Have a safe journey!</th>
+                    </tr>
+                    <tr>
+                      <td>For any details reach out to us at 1800-1800-1800</td>
+                    </tr>
+                </table>
+                    <div>  
+                        <!-- this.userData._id  -->
+                        <button  id="cancel" (click)="cancelTicket(ticket.ticketid,j)" class='btn btn-primary'>Cancel Ticket</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample2" role="button" aria-expanded="false" aria-controls="collapseExample2">
+            Cancelled Trips
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample2">
+        <div *ngFor="let ticket of cancelledTickets;let k=index;">
+            <div class="card card-body">
+                <div class="card" style="width: 22rem;">
+                    <div class="card-black">
+                        <div class="ticket-id"><span>TICKET ID-</span> {{ticket.ticketid}}</div>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ticket.Source}} <> {{ticket.Destination}}</h5> 
+                      <table>
+                          <tr>
+                            <th class='ticket-text-heading'>Seats Booked</th>
+                            <td class='ticket-text-info'>{{ticket.Seats}}</td>
+                          </tr>
+                          <tr>
+                            <th class='ticket-text-heading'>Bus Name</th>
+                            <td class='ticket-text-info'>{{ticket.busName}}</td>
+                          </tr>
+                          <tr>
+                            <th class='ticket-text-heading'>Price</th>
+                            <td class='ticket-text-info'>{{ticket.Total_price}}</td>
+                          </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <th class='ticket-text-heading'>Date</th>
+                          <td class='ticket-text-info'>{{ticket.Date}}</td>
+                        </tr>
+                        <tr>
+                          <th class='ticket-text-heading'>Departure</th>
+                          <td class='ticket-text-info'>{{ticket.Departure}}</td>
+                        </tr>
+                        <tr>
+                          <th class='ticket-text-heading'>Arrival</th>
+                          <td class='ticket-text-info'>{{ticket.Arrival}}</td>
+                        </tr>
+                        <tr>
+                          <th>Have a safe journey!</th>
+                        </tr>
+                        <tr>
+                          <td>For any details reach out to us at 1800-1800-1800</td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+      </div>
+    
+    <p>
+        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false" aria-controls="collapseExample3">
+           Completed Trips 
+        </a>
+    </p>
+    <div class="collapse" id="collapseExample3">
+        <div *ngFor="let ticket of completedTickets;let l=index;">
+            <div class="card card-body">
+                <div class="card" style="width: 22rem;">
+                    <div class="card-black">
+                        <div class="ticket-id"><span>TICKET ID-</span>{{ticket.ticketid}}</div>
+                    </div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ticket.Source}} <> {{ticket.Destination}}</h5> 
+                      <table>
+                          <tr>
+                            <th class='ticket-text-heading'>Seats Booked</th>
+                            <td class='ticket-text-info'>{{ticket.Seats}}</td>
+                          </tr>
+                          <tr>
+                            <th class='ticket-text-heading'>Bus Name</th>
+                            <td class='ticket-text-info'>{{ticket.busName}}</td>
+                          </tr>
+                          <tr>
+                            <th class='ticket-text-heading'>Price</th>
+                            <td class='ticket-text-info'>{{ticket.Total_price}}</td>
+                          </tr>
+                      </table>
+                      <table>
+                        <tr>
+                          <th class='ticket-text-heading'>Date</th>
+                          <td class='ticket-text-info'>{{ticket.Date}}</td>
+                        </tr>
+                        <tr>
+                          <th class='ticket-text-heading'>Departure</th>
+                          <td class='ticket-text-info'>{{ticket.Departure}}</td>
+                        </tr>
+                        <tr>
+                          <th class='ticket-text-heading'>Arrival</th>
+                          <td class='ticket-text-info'>{{ticket.Arrival}}</td>
+                        </tr>
+                        <tr>
+                          <th>Have a safe journey!</th>
+                        </tr>
+                        <tr>
+                          <td>For any details reach out to us at 1800-1800-1800</td>
+                        </tr>
+                    </table>
+                    </div>
+                </div>
+            </div>
+          </div>
+    </div>
+
+

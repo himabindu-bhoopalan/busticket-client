@@ -9,14 +9,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 export class AllusersComponent implements OnInit {
 userdata
-delForm
+reasonForm
   constructor(private service:BusticketService) { 
     this.service.userlist().subscribe((data)=>{
       console.log('inside userlist method'+data);
       console.dir(data.data);
       this.userdata=data.data;
     })
-    this.delForm = new FormGroup({
+    this.reasonForm = new FormGroup({
       'reason':new FormControl('',Validators.required)
     })
   }
@@ -25,10 +25,23 @@ delForm
   }   
   deleteUser(id){
     // console.log(id)
+    sessionStorage.setItem('user_id',JSON.stringify(id))
 
   }
   sendData(){
    console.log('data sent');
-  //  console.log(this.delForm);
+   let id=JSON.parse(sessionStorage.getItem('user_id'))
+   this.reasonForm.value._id=id
+  console.log(this.reasonForm.value);
+  this.service.userdelete(this.reasonForm.value).subscribe((data) => {
+    if (data.status == 200) {
+      alert('user deleted');
+      location.reload();
+    }else{
+      alert('user not deleted.Try again.');
+    }
+  })
+
+
   }
 }

@@ -1,119 +1,179 @@
-<app-navbar-user></app-navbar-user>
+<div *ngIf="this.user">
+  <app-navbar-user></app-navbar-user>
+</div>
+<div *ngIf="!this.user">
+  <app-navbar-bus-op></app-navbar-bus-op>
+</div>
+
+
 
 <div class="jumbotron">
-    <div class="container">
-    <div class="flex-container">
-        <div id='red' onclick='ar()'>
-        </div>
-        <div  id= 'green' onclick='ar()'></div>
-        <div id= 'grey' onclick='ar()'></div>  
+  <h4>CHOOSE YOUR SEATS</h4>
+  <div class="flex-container">
+    <div id='red'>
     </div>
-        
-    <div class="container2">
-        <div>
-          <label id='text'>Available</label>
-        </div>
-        <div>
-          <label id='text'>Booked</label>
-        </div>
-        <div>
-          <label id='text'>Taken</label>
-        </div>
+    <div id='green'></div>
+    <div id='grey'></div>
+  </div>
+
+  <div class="container2">
+    <div>
+      <label id='text'>Available</label>
     </div>
-      
-    <div class="container3">
-        <div class='steerinclass'>
-          <img class='steering' src="https://cdn4.iconfinder.com/data/icons/automotive-glyph/64/automotive_vehicle-18-512.png">
-        </div>
-        <table class='table1'>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-           <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-        </table>
-        <table class='table2'>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-           <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-          <tr>
-            <td>
-              <div onclick="ar()" class="seat"></div>
-            </td>
-             <td>
-                <div onclick="ar()" class="seat"></div>
-             </td>
-          </tr>
-        </table>
+    <div>
+      <label id='text'>Booked</label>
+    </div>
+    <div>
+      <label id='text'>Taken</label>
+    </div>
+  </div>
+
+  <div class="container3">
+    <div class='steerinclass'>
+      <img class='steering'
+        src="https://cdn4.iconfinder.com/data/icons/automotive-glyph/64/automotive_vehicle-18-512.png">
+    </div>
+    <table class='table1'>
+      <tr>
+        <td>
+          <div  (click)="ar(1)" id='1'  class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(2)" id='2' class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(3)" id='3'   class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(4)" id='4'   class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(5)" id='5'   class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(6)" id='6'   class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(7)" id='7'   class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(8)" id='8'    class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(9)" id='9'   class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(10)" id='10'   class="seat"></div>
+        </td>
+      </tr>
+    </table>
+    <table class='table2'>
+      <tr>
+        <td>
+          <div  (click)="ar(11)" id='11' class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(12)" id='12' class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(13)" id='13' class="seat"></div>
+        </td>
+        <td>
+          <div (click)="ar(14)" id='14' class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div  (click)="ar(15)" id='15' class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(16)" id='16' class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div (click)="ar(17)" id='17' class="seat"></div>
+        </td>
+        <td>
+          <div  (click)="ar(18)" id='18' class="seat"></div>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <div (click)="ar(19)" id='19' class="seat"></div>
+        </td>
+        <td>
+          <div (click)="ar(20)" id='20' class="seat"></div>
+        </td>
+      </tr>
+    </table>
+  
+  </div>
+  <div class=container4>
+    <button type="button" (click)="refresh()" class="btn btn-dark">reset</button>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+  </div>
+
+  <div class=container4>
+    <button type="button"  class="btn btn-dark">seats selected-{{seatscount}}</button>
+  </div>
+  <div> User?</div>
+ 
+
+  <div class=container4>
+    <button type="button" [disabled]="!this.user" (click)="confirm(this.seatnumbers)" routerLink="/ticket" class="btn btn-dark">confirm</button>
+  </div>
+  <div> Bus Operator?</div>
+  <div class=container4>
+    <!--when this confirm is clicked modal should show asking for user details so that then it can be added to user db in tickets  --> 
+     <!--and tickets db and update bus seats too..getting user info is imp here --> 
+    <button type="button" id='reserve' data-toggle="modal" data-target="#exampleModal" [disabled]="this.user" class="btn btn-dark">reserve</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter User Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
-    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+      <div class="modal-body">
+
+        <form class="form-signin" [formGroup]="reserveForm" (submit)="confirm(this.seatnumbers)">
+                       
+          <div class="form-group">
+              <input type="text" id="userInput" formControlName="userInput" class="form-control"
+                  placeholder="User Name or Email or Phone" required autofocus>
+
+          </div>
+         
+          <div class="form-group">
+              <input [disabled]="!reserveForm.valid"   class="btn btn-lg btn-primary btn-block text-uppercase"
+               type="submit" value="BOOK">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Continue reserving</button> -->
+      </div>
+    </div>
+  </div>
 </div>
-</div>
-<button type="button" (click)='booked()' class="btn btn-success">Make payment</button>
-<button type="button" routerLink="/ticket" class="btn btn-dark">View Ticket</button>
-<router-outlet><router-outlet>
-    
+
+<router-outlet>
+</router-outlet>

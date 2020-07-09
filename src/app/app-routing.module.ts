@@ -33,7 +33,7 @@ const routes: Routes = [
   {   path:"trips",
       component:TripsComponent
   },
-  {   path:"selectseats",
+  {   path:"selectseats/:id",
       component:SeatsComponent
   },
   {

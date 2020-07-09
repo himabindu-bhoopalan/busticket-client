@@ -10,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AddbusComponent implements OnInit {
 busForm
+res
   constructor(private service:BusticketService,private router:Router) {
+    let busOperator=JSON.parse(sessionStorage.getItem('busopdata'))
     this.busForm = new FormGroup({
-      'Bus_operator_id':new FormControl('',Validators.required),
+      'Bus_operator_id':new FormControl(busOperator.unique_id,Validators.required),
       'Bus_Name':new FormControl('',Validators.required),
+      'Bus_ID':new FormControl('',Validators.required),
       'Date':new FormControl('',Validators.required),
       'Departure':new FormControl('',Validators.required),
       'Arrival':new FormControl('',Validators.required),
@@ -36,11 +39,27 @@ busForm
     console.log(seats);
     this.busForm.value.all_seats=seats
     
-    console.dir(this.busForm.value);
+    console.dir(this.busForm.value.Bus_ID);
+
+    let busOperator=JSON.parse(sessionStorage.getItem('busopdata'))
+    this.service.addbustoOp({_id:busOperator._id,Bus_ID:this.busForm.value.Bus_ID,Bus_Name:this.busForm.value.Bus_Name}).subscribe((data)=>{
+      this.res=data
+      if(this.res.status==200){
+        console.log('bus added to bus op db');
+      }else{
+        console.log('bus not added to bus op db');
+        
+      }
+    })
     this.service.postBus(this.busForm.value).subscribe((productdata)=>{
-      alert('New item'+this.busForm.value.Bus_Name +' has been created!');
-      this.router.navigate(['/bus_operator']); 
-      //redirecting to home page after action is completed
+      if(productdata.status==200){
+        alert('New item'+this.busForm.value.Bus_Name +' has been created!');
+        this.router.navigate(['/bus_operator']); 
+        //redirecting to home page after action is completed
+      }else{
+        console.log('bus not added in busdb');
+      }
+      
     })
   }
   }

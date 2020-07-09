@@ -1,31 +1,126 @@
 <app-navbar-bus-op></app-navbar-bus-op>
+<div class="container">
+  <div id="nodatafound">
+  </div>
+  <div class="col-lg-8" *ngFor="let bus of busdata">
+    <div class="card ">
+      <div class="card-header">
+       Approval Status: <span>{{bus.approval_status}}</span>
+      </div>
+      <div class="card-body">
+        <span class="location icons">    
+          <ul>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+            <i class="fa fa-map-marker" aria-hidden="true"></i>
+          </ul>
+        </span>
+        <!-- dep time, arr time, difference time -->
+        <span class="card-text dep-arr-diff">
 
-<table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
+          <ul>
+            <li>Departure time{{bus.Departure}}</li>
+            <li>Time duration{{bus.Departure}}-{{bus.Arrival}}</li>
+            <li>Arrival time{{bus.Arrival}}</li>
+          </ul>
+        </span>
+        <span class="title">
+          <h5 class="card-title">Bus Name {{bus.Bus_Name}}</h5>
+          <p class="card-text">Bus operator {{bus.Bus_operator_id}}</p>
+        </span>
+        <!-- to add price ,seats left ,book seat-->
+        <span class="card-text price-seats-left">
+          <ul>
+            <li>
+              Price {{bus.Ticket_price}}
+            </li>
+            <li>
+              Seats left{{bus.seats_left}}
+            </li>
+          </ul>
+
+            <div class="container100" *ngIf="bus.approval_status=='approved' ">
+              <a href="#" [routerLink]="['/selectseats',bus._id]" class="btn btn-primary">
+                RESERVE SEATS
+              </a>
+           
+  
+            <!-- FOR MODIFYING IF SEATS LEFT ==20 THEN ENABLE THIS BUTTON-->
+              <div *ngIf="bus.seats_left==20&& bus.approval_status=='approved' ">
+                <button   data-toggle="modal" (click)="setbus(bus._id)" data-target="#exampleModal" class="btn btn-primary">MODIFY BUS DETAILS</button>
+              </div>
+             
+            </div>
+        
+        
+
+        </span>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter the new details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-updatebus" [formGroup]="updatebusForm" (submit)="updatebus()">
+                       
+          <div class="form-group">
+            <label class="form-update" for="Bus_Name">Bus_Name</label>
+              <input type="text" id="Bus_Name" formControlName="Bus_Name" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Source">Source</label>
+              <input type="text" id="Source" formControlName="Source" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Destination">Destination</label>
+              <input type="text" id="Destination" formControlName="Destination" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Date">Date</label>
+              <input type="date" id="Date" formControlName="Date" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Departure">Departure</label>
+              <input type="time" id="Departure" formControlName="Departure" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Arrival">Arrival</label>
+              <input type="time" id="Arrival" formControlName="Arrival" class="form-control"
+                  placeholder="" required autofocus>
+
+          </div>
+         
+         
+          <div class="form-group">
+              <input [disabled]="!updatebusForm.valid"   class="btn btn-danger"
+               type="submit" value="update">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      
+      </div>
+    </div>
+  </div>
+</div>

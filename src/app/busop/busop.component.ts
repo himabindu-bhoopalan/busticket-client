@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class BusopComponent implements OnInit {
 user;
   constructor() {
-    this.user = sessionStorage.getItem('busopdata');
+    this.user = JSON.parse(sessionStorage.getItem('busopdata'));
    }
 
   ngOnInit(): void {

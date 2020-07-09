@@ -11,7 +11,7 @@
             <input type="date" formControlName="Date" class="form-control">
           </span> 
           <div class="col-lg-3">
-            <input type="submit" value='Find Buses' class="btn btn-danger">
+            <input type="submit" [disabled]="!findForm.valid" value='Find Buses' class="btn btn-danger">
         </div>
         </div>
        
@@ -53,7 +53,7 @@
               Price {{bus.Ticket_price}}
             </li>
             <li>
-              <a href="#" routerLink="/selectseats" class="btn btn-primary">SELECT SEATS</a>
+              <a href="#" [routerLink]="['/selectseats',bus._id]" class="btn btn-primary">SELECT SEATS</a>
             </li>
             <li>
               Seats left {{this.count_seats}}

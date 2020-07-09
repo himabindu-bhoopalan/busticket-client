@@ -27,9 +27,8 @@ category:any=['User','Bus Operator']
   }
   sendData(){
     //check for a valid form 
-    //determined to make a beautiful form
     //generate a unique id for each user on form submission
-    //the tough part-according to the category i have to route to a corresponding component   
+    //according to the category i have to route to a corresponding component   
     console.log(this.userForm.value);
     console.log(this.userForm.valid);
     if(this.userForm.valid){
@@ -37,11 +36,14 @@ category:any=['User','Bus Operator']
       this.user.usersignup(this.userForm.value).subscribe((data)=>{
         this.userData=data 
         if(data.status==200){
-          // alert("please sign in with the credentials");
-          this.router.navigate["/"];
+          
+          alert("please sign in with the credentials");
+          this.router.navigate(["/signin"]);
         }
         else if(data.status==400){
           alert("error");
+        }else{
+          alert('unexpected error occured.please try again.')
         }
         
       })

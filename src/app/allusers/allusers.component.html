@@ -37,43 +37,50 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of userdata;let j=index">
+    
+    <tr  *ngFor="let user of userdata;let j=index">
+    <span *ngIf="user.message==''">
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phnumber}}</td>
       <td>{{user.unique_id}}</td>
       <td>{{user.tickets.length}}</td>
-      <td><button type="button" class="btn btn-dark" (click)="deleteUser(user._id)" data-toggle="modal"
-          data-target="#staticBackdrop">Delete</button></td>
+      <td><button type="button" class="btn btn-dark" (click)="deleteUser(user._id)" 
+        data-toggle="modal" data-target="#exampleModal">Delete</button></td>
+    </span> 
     </tr>
+  
   </tbody>
 </table>
 
+
 <!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog"
-  aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Confirm Deletion</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form class="form-modal" [formGroup]="delForm" (submit)="sendData()">
-        <div class="modal-body">
+      <div class="modal-body">
+        <!-- Form -->
+        <form class="form-signin" [formGroup]="reasonForm" (submit)="sendData()">
+                       
           <div class="form-group">
-            <label for="reason">Specify the reason</label>
+            <label class="form-update" for="reason">Please enter a proper reason</label>
+              <input type="text" id="reason" formControlName="reason" class="form-control"
+                  placeholder="eg.User not active for 2 years" required autofocus>
+
           </div>
           <div class="form-group">
-            <input class="form-modal" type="text" id='reason' formControlName='reason' name='reason'>
-          </div>
+            <input [disabled]="!reasonForm.valid"   class="btn btn-lg btn-primary"
+             type="submit" value="delete">
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <input type="submit" class="btn btn-primary" data-dismiss="modal" value="Delete">
-        </div>
-      </form>
+          
+        </form>
+      </div>
     </div>
   </div>
 </div>

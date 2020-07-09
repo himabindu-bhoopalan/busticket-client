@@ -3,7 +3,7 @@
   <div class="card" style="width: 36rem;">
     <div class="card-body">
       <h5 class="card-title">User Profile</h5>
-      <table class="table" [formGroup]="profileForm">
+      <table class="table">
         <tbody>
           <tr>
             <td>Id</td>
@@ -26,8 +26,66 @@
         </tbody>
       </table>
       <div>
-        <button type="button" (click)='update()' class="btn btn-danger">Update</button>
+        <button type="button"  data-toggle="modal" data-target="#exampleModal" class="btn btn-danger">Update</button>
       </div>
     </div>
   </div>
 </div> 
+<!-- Modal -->
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" >
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Enter the new details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Form to update details -->
+        <form class="form-signin" [formGroup]="updateForm" (submit)="update()">
+                       
+          <div class="form-group">
+            <label class="form-update" for="name">Id(length should be 7)</label>
+              <input type="text" id="Id" formControlName="Id" class="form-control"
+                  placeholder="Id" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Name">Name</label>
+              <input type="text" id="Name" formControlName="Name" class="form-control"
+                  placeholder="Name" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Email">Email</label>
+              <input type="email" id="Email" formControlName="Email" class="form-control"
+                  placeholder="Email" required autofocus>
+
+          </div>
+          <div class="form-group">
+            <label class="form-update" for="Phone">Phone(10 digit)</label>
+              <input type="number" id="Phone" formControlName="Phone" class="form-control"
+                  placeholder="Phone" required autofocus>
+
+          </div>
+         
+          <div class="form-group">
+              <input [disabled]="!updateForm.valid"   class="btn btn-danger"
+               type="submit" value="update">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+      </div>
+    </div>
+  </div>
+</div>

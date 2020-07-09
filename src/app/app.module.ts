@@ -24,6 +24,7 @@ import { SeatsComponent } from './seats/seats.component';
 import { TicktComponent } from './tickt/tickt.component';
 import { BusopapComponent } from './busopap/busopap.component';
 import { TripsComponent } from './trips/trips.component';
+import { SeatsBusopComponent } from './seats-busop/seats-busop.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import { TripsComponent } from './trips/trips.component';
     SeatsComponent,
     TicktComponent,
     BusopapComponent,
-    TripsComponent
+    TripsComponent,
+    SeatsBusopComponent
   ],
   imports: [
     BrowserModule,

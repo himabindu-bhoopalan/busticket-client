@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BusticketService } from '../busticket.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-viewprofile',
@@ -12,31 +12,18 @@ export class ViewprofileComponent implements OnInit {
   id
   user
   user_data
-  profileForm
-  constructor(private busservice:BusticketService,private route:ActivatedRoute) { 
-    // this.user = this.route.params.subscribe(params => {
-    //   this.id = params['id']
-    //   console.log(this.id);
-    //   console.log('params'+params);
-    //   });
-      
-     
-    //   this.busservice.get_user_data(this.id).subscribe((data)=>{
-    //     console.log('inside viewprofile constructor '+data);
-    //     console.dir(data);
-    //     this.user_data=data;
-        
-    //   })
-    
+  updateForm
+  constructor(private service:BusticketService,private route:ActivatedRoute,private router:Router) { 
+   
     let user = sessionStorage.getItem('userdata');
     this.user_data=JSON.parse(user);
-      this.profileForm = new FormGroup({
-        'Id':new FormControl('',),
-        'Name':new FormControl('',),
-        'Email':new FormControl('',),
-        'Phone':new FormControl('',)
+      this.updateForm = new FormGroup({
+        'Id':new FormControl(this.user_data.unique_id,[Validators.minLength(7)]),
+        'Name':new FormControl(this.user_data.name,),
+        'Email':new FormControl(this.user_data.email,),
+        'Phone':new FormControl(this.user_data.phnumber,[Validators.maxLength(10)])
       })
-      
+     
   }
 
   ngOnInit(): void {
@@ -44,7 +31,23 @@ export class ViewprofileComponent implements OnInit {
      
   }
    update(){
-     alert('update service');
+    
+    this.updateForm.value._id= this.user_data._id
+    // console.log(this.updateForm.value);
+    //call service update it and then navigate to home page 
+    this.service.updateprofile(this.updateForm.value).subscribe((data)=>{
+      // console.log(data);
+      if(data.status==200){
+       alert('User details updated.Please login with new details')
+     
+       this.router.navigate(['/']);
+          location.reload();
+        
+      }else{
+        alert('Update not successful,try again or didnt add any new updated details.');
+      }
+     
+    })
    }
   
   

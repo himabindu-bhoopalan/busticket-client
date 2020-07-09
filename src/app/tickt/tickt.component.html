@@ -1,44 +1,59 @@
-<app-navbar-user></app-navbar-user>
-<p>tickt works!</p>
-<!-- ticket planning to show in pop up -->
-<!-- ticket cancelled ,upcoming ,completed trips -->
+<div *ngIf="isBusoperator">
+  <app-navbar-bus-op></app-navbar-bus-op>
+</div>
+<div *ngIf="!isBusoperator">
+  <app-navbar-user></app-navbar-user>
+</div>
+
+<!-- ticket -->
 <div class='container'>
     <div class="card" style="width: 18rem;">
         <div class="card-black">
-            <div class="ticket-id">TICKET ID - CHNMAD123</div>
+            <div class="ticket-id"><span>TiCKET ID</span>{{this.ticketid}}</div>
         </div>
         <div class="card-body">
-          <h5 class="card-title">CHN <> MAD</h5>
+          <h5 class="card-title">{{bus.Source}} <> {{bus.Destination}}</h5> 
           <table>
               <tr>
-                <th class='ticket-text-heading'>Passengers</th>
-                <td class='ticket-text-info'>8 Adults</td>
+                <th class='ticket-text-heading'>Seats Booked</th>
+                <td class='ticket-text-info'>{{seat}}</td>
               </tr>
               <tr>
-                <th class='ticket-text-heading'>Bus-No</th>
-                <td class='ticket-text-info'>1892ych</td>
+                <th class='ticket-text-heading'>Bus-Name</th>
+                <td class='ticket-text-info'>{{bus.Bus_Name}}</td>
               </tr>
               <tr>
                 <th class='ticket-text-heading'>Price</th>
-                <td class='ticket-text-info'>2000</td>
+                <td class='ticket-text-info'>{{total_bill}}</td>
               </tr>
           </table>
           <table>
             <tr>
               <th class='ticket-text-heading'>Date</th>
-              <td class='ticket-text-info'>12 feb 2020</td>
-            </tr>
-            <tr>
-              <th class='ticket-text-heading'>Seats</th>
-              <td class='ticket-text-info'>s1,s2,s3,s4,s5</td>
+              <td class='ticket-text-info'>{{bus.Date}}</td>
             </tr>
             <tr>
               <th class='ticket-text-heading'>Departure</th>
-              <td class='ticket-text-info'>20.10</td>
+              <td class='ticket-text-info'>{{bus.Departure}}</td>
+            </tr>
+            <tr>
+              <th class='ticket-text-heading'>Arrival</th>
+              <td class='ticket-text-info'>{{bus.Arrival}}</td>
+            </tr>
+            <tr>
+              <th>Have a safe journey!</th>
+            </tr>
+            <tr>
+              <td>For any details reach out to us at 1800-1800-1800</td>
             </tr>
         </table>
-          <a href="#" class="btn btn-primary">Make Payment</a>
-          <a href="#" class="btn btn-primary">View Ticket</a>
+         
         </div>
     </div>
+    <div class="container3">
+      <button  (click)="AddTicket('payment')" id="payment" class="btn btn-primary">Make Payment</button>
+      <!-- Option disabled for the bus operator-->
+      <button  [disabled]="this.isBusoperator" routerLink="/trips" class="btn btn-primary">View Ticket</button>
+    </div>
+  
 </div>

@@ -19,7 +19,7 @@ export class SigninComponent implements OnInit {
     })
    }
   
-  ngOnInit(): void {
+  ngOnInit(): void {   
   }
   signIn(){
     console.log(this.signinForm.value);
@@ -54,22 +54,30 @@ export class SigninComponent implements OnInit {
 
     //service  
     this.busservice.user_sign_in(signin_data).subscribe((data)=>{
-     console.log('signin component'+data.status);
-     console.dir(data.userdata);
-     console.log('signin component'+data.message);
+    //  console.log('signin component'+data.status);
+    //  console.dir(data.userdata);
+    //  console.log('signin component'+data.message);
      if(data.status==200){
-       console.log("hello");
+      //  console.log("hello");
        //routing to corresponding component and setting the data to session storage
        if(this.signinForm.value.category=="User"){
         sessionStorage.setItem('userdata', JSON.stringify(data.userdata));
-        this.router.navigate(['/user']);
+        if(data.userdata.message){
+          console.log(data.userdata.message);
+          alert('This account was deleted for the following reason: '+data.userdata.message);
+        }else{
+          this.router.navigate(['/user']);
+        }
+       
        }else{
         sessionStorage.setItem('busopdata', JSON.stringify(data.userdata)); 
         this.router.navigate(['/bus_operator']);
 
        }
        
-     }
+     }else{
+      alert('some error occured.Please try again');
+    }
       
     })
   }
