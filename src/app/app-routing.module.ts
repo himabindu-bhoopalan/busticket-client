@@ -27,6 +27,9 @@ const routes: Routes = [
   {   path:"signin",
       component:SigninComponent
   },
+  {   path:"admin",
+      component:AdminComponent
+  },
   {   path:"ticket",
       component:TicktComponent
   },

@@ -11,6 +11,7 @@ export class BusticketService {
   updatebus(formdata):Observable<any>{
     console.log(formdata);
     console.log('updatebus service');
+   
     return this.http.put('https://busbookingnode.herokuapp.com/updatebus',formdata);
 
   }
