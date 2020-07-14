@@ -29,8 +29,8 @@ category:any=['User','Bus Operator']
     //check for a valid form 
     //generate a unique id for each user on form submission
     //according to the category i have to route to a corresponding component   
-    console.log(this.userForm.value);
-    console.log(this.userForm.valid);
+    // console.log(this.userForm.value);
+    // console.log(this.userForm.valid);
     if(this.userForm.valid){
     
       this.user.usersignup(this.userForm.value).subscribe((data)=>{

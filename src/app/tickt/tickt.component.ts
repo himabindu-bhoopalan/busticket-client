@@ -76,7 +76,7 @@ isBusoperator:Boolean=false
     for (var i = 0; i < 5; i++) {
     c+= characters.charAt(Math.floor(Math.random() * len));
     }
-    console.log("ticket id" + c)
+    // console.log("ticket id" + c)
     return c
   }
 AddTicket(id){
@@ -84,15 +84,15 @@ AddTicket(id){
 //service-2 :to update the seats in the bus..
 //service-3 :also should be added in passenger db service -3
 
-console.log('3 services here ');
+// console.log('3 services here ');
 
 //service-1
 console.dir(this.ticket);
 this.service.addticket(this.ticket).subscribe((data)=>{
   this.res=data
-  console.log('add ticket method',data);
+  // console.log('add ticket method',data);
   if(this.res.status==200){
-    console.log('ticket added');
+    // console.log('ticket added');
     this.count1++;
   }else{
     alert('ticket not added.Please try again.');
@@ -103,13 +103,13 @@ this.service.addticket(this.ticket).subscribe((data)=>{
 let a=sessionStorage.getItem('allseats')
 this.all_seats=JSON.parse(a)
 this.updateseats={"bus_id":this.bus._id,"seatList":this.all_seats}
-console.log('update seats');
-console.log(this.updateseats);
+// console.log('update seats');
+// console.log(this.updateseats);
 this.service.updateSeats(this.updateseats).subscribe((data)=>{
-  console.log('update seats of the bus!',data);
+  // console.log('update seats of the bus!',data);
   this.res=data
   if(this.res.status==200){
-    console.log('Seats updated');
+    // console.log('Seats updated');
     this.count1++;
   }else{
     alert('Seats not updated');
@@ -125,16 +125,16 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
   let usersession=sessionStorage.getItem('userdata')
   this.user=JSON.parse(usersession);
-  console.log(this.user);
+  // console.log(this.user);
   this.addticket={user_id:this.user._id,ticket:this.ticket}
   this.service.addTickettoUser(this.addticket).subscribe((data)=>{
     console.log(data);
     if(this.res.status==200){
-      console.log('ticket added to user db');
+      // console.log('ticket added to user db');
       this.count1++;
       
     }else{
-      console.log('ticket not added to user db');
+      // console.log('ticket not added to user db');
     }
   }) 
   

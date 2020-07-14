@@ -38,10 +38,11 @@ export class ViewprofileComponent implements OnInit {
     this.service.updateprofile(this.updateForm.value).subscribe((data)=>{
       // console.log(data);
       if(data.status==200){
-       alert('User details updated.Please login with new details')
-     
-       this.router.navigate(['/']);
-          location.reload();
+        this.router.navigate(['/signin']);
+        alert('User details updated.Please login with new details');
+        
+       
+      
         
       }else{
         alert('Update not successful,try again or didnt add any new updated details.');

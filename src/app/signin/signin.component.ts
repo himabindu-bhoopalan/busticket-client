@@ -22,14 +22,14 @@ export class SigninComponent implements OnInit {
   ngOnInit(): void {   
   }
   signIn(){
-    console.log(this.signinForm.value);
+    // console.log(this.signinForm.value);
     
     let signin_data=[]
     let a={password:this.signinForm.value.password}
     signin_data.push(a)
     signin_data.push({category:this.signinForm.value.category});
-    console.log(this.signinForm.value);
-    console.dir(signin_data);
+    // console.log(this.signinForm.value);
+    // console.dir(signin_data);
     // console.log(this.signinForm.value.userInput)
     
     
@@ -37,35 +37,34 @@ export class SigninComponent implements OnInit {
         let b={phnumber:Number(this.signinForm.value.userInput)}
         signin_data.push(b)
         
-        console.dir(signin_data);
+        // console.dir(signin_data);
         
     }
     else if(this.signinForm.value.userInput.indexOf("@")!==-1 && this.signinForm.value.userInput.indexOf(".com")!==-1){
       let b={email:this.signinForm.value.userInput}
       signin_data.push(b)
-      console.dir(signin_data);
+      // console.dir(signin_data);
     }
     else{
      
       signin_data.push({name:this.signinForm.value.userInput})
-      console.dir(signin_data);
+      // console.dir(signin_data);
 
     }
 
     //service  
     this.busservice.user_sign_in(signin_data).subscribe((data)=>{
-    //  console.log('signin component'+data.status);
-    //  console.dir(data.userdata);
-    //  console.log('signin component'+data.message);
+    
      if(data.status==200){
-      //  console.log("hello");
+     
+
        //routing to corresponding component and setting the data to session storage
        if(this.signinForm.value.category=="User"){
         sessionStorage.setItem('userdata', JSON.stringify(data.userdata));
-        if(data.userdata.message){
-          console.log(data.userdata.message);
+        if(data.userdata.message!=null||data.userdata.message!=undefined){
+          // console.log(data.userdata.message);
           alert('This account was deleted for the following reason: '+data.userdata.message);
-        }else if(this.signinForm.value.name=="hima" ||this.signinForm.value.phnumber==8900789000||this.signinForm.value.email=="hima@gmail.com"){
+        }else if(data.userdata.name=="hima" ||data.userdata.phnumber==8900789000||data.userdata.email=="hima@gmail.com"){
           this.router.navigate(['/admin']);
         }else{
           this.router.navigate(['/user']);
@@ -77,8 +76,16 @@ export class SigninComponent implements OnInit {
 
        }
        
-     }else{
-      alert('some error occured.Please try again');
+     }else if (data.status==404){
+      alert('User not found.Please sign up');
+      location.reload();
+    }else if(data.status==400){
+
+      alert(data.message);//wrong password 
+      location.reload();
+    }else{
+      alert('Network error!');
+      location.reload();
     }
       
     })
