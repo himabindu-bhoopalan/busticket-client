@@ -113,7 +113,8 @@ export class TripsComponent implements OnInit {
 
     if (timeleft > 5) {
       //put request
-      this.service.cancelTicket(this.userData._id, ticketid).subscribe((data) => {
+      let obj={"_id":this.userData._id,"ticketid":ticketid}
+      this.service.cancelTicket(obj).subscribe((data) => {
         // console.log(data);
         this.cancel = data
         if (this.cancel.status == 200) {
@@ -124,7 +125,8 @@ export class TripsComponent implements OnInit {
         }
       })
       //another put request to tickets db 
-      this.service.Ticketdb(ticketid).subscribe((data) => {
+      let obj2={"ticketid":ticketid}
+      this.service.Ticketdb(obj2).subscribe((data) => {
         // console.log(data);
         this.cancel2 = data
         if (this.cancel2.status == 200) {
@@ -145,5 +147,4 @@ export class TripsComponent implements OnInit {
   }
 
 }
-
 
