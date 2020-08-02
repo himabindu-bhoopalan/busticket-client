@@ -145,7 +145,7 @@ export class BusticketService {
   cancelled_seat_available(obj):Observable<any>{
     console.log('cancelled_seat_available service');
     // return this.http.put('http://localhost:3040/bus/cancelseats',obj);
-    return this.http.get('https://busnode.herokuapp.com/bus/cancelseats',obj);
+    return this.http.put('https://busnode.herokuapp.com/bus/cancelseats',obj);
   }
 //-----------------*************------------------------
   addbustoOp(idandbusid):Observable<any>{
@@ -160,6 +160,7 @@ export class BusticketService {
     // return this.http.get('http://localhost:3040/findbusofoperator/'+id);
     return this.http.get('https://busnode.herokuapp.com/findbusofoperator/'+id);
   }
+
 
  
 }
