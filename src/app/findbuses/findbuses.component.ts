@@ -43,7 +43,7 @@ initial_busdata
   ngOnInit(): void {
   }
   removeOption(){
-
+    this.placesDestination=["Chennai","Vellore","Madurai","Chittoor"]
     let x =this.findForm.value.Source;
     // console.log(x);
     this.index = this.placesDestination.indexOf(x);
