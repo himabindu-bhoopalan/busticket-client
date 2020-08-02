@@ -33,6 +33,7 @@ data1
       if(this.data1.status==200){
         console.log('updated');
         alert('Approved!');
+        location.reload();
       }
       if(this.data1.status==400){
         alert('Something went wrong ..Try again!');

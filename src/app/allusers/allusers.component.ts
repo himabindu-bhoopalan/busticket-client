@@ -26,6 +26,14 @@ reasonForm
   deleteUser(id){
     // console.log(id)
     sessionStorage.setItem('user_id',JSON.stringify(id))
+    this.userdata.forEach(element => {
+      if(element._id=id){
+
+        this.userdata.splice(element,1);
+      }
+    });
+    
+   
 
   }
   sendData(){

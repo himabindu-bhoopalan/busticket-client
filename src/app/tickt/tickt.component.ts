@@ -25,44 +25,64 @@ isBusoperator:Boolean=false
       this.isBusoperator=true;
     }
     console.log('inside the constructor');
+
+    //get user details
+    let usersession=sessionStorage.getItem('userdata')
+    this.user=JSON.parse(usersession);
+    console.log(this.user);
+
     //getting seats
     let seatlist =sessionStorage.getItem('seats')
     this.seat=JSON.parse(seatlist);
+
     //getting bus details
     let busdata=sessionStorage.getItem('busData')
     this.bus=JSON.parse(busdata);
+    console.log(this.bus);
+
     //calculate the bill
     this.total_bill=this.bus.Ticket_price*this.seat.length
+
+
     //generate ticket-id
     this.ticketid=this.generate_id(this.bus.Source,this.bus.Destination)
     this.ticket={
-      ticketid:this.ticketid, //1
-      busName:this.bus.Bus_name,//2//this field is not getting added to dbs ********ERRROORRRR**********
-      Bus_operator_id:this.bus.Bus_operator_id,//3
-      Departure:this.bus.Departure,//4
-      Arrival:this.bus.Arrival,//5
-      Total_price:this.total_bill,//6
-      Ticket_price:this.bus.Ticket_price,//7
-      Source:this.bus.Source,//8
-      Destination:this.bus.Destination,//9
-      Date:this.bus.Date,//9
-      Seats:this.seat,//10
-      Status:"success" //11                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+      ticketid:this.ticketid, //1       
+      passenger_name:this.user.name,//2
+      passenger_email:this.user.email,//3
+      passenger_phone:this.user.phnumber,//4
+      Bus_Name:this.bus.Bus_Name,//5
+      Bus_ID:this.bus.Bus_ID,//5
+      Bus_operator_id:this.bus.Bus_operator_id,//6
+      Departure:this.bus.Departure,//7
+      Arrival:this.bus.Arrival,//8
+      Total_price:this.total_bill,//9
+      Ticket_price:this.bus.Ticket_price,//10
+      Source:this.bus.Source,//11
+      Destination:this.bus.Destination,//12
+      Date:this.bus.Date,//13
+      Seats:this.seat,//14
+      Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
   }
+  console.log(this.ticket);
   // "_id" : ObjectId("5f01feb4d90bc313286ddd7e"),
   // "ticketid" : "CheMad19293",//1
-  // "Bus_operator_id" : "sa12345",//3
-  // "Departure" : "19:20",//4
-  // "Arrival" : "21:10",//5
-  // "Total_price" : 500,//6
-  // "Ticket_price" : 500,//7
-  // "Source" : "Chennai",//8
-  // "Destination" : "Madurai",//9
-  // "Date" : "2020-06-27",//9
-  // "Seats" : [//10
+  //passenger_name:this.user.name,//2
+  //passenger_email:this.user.email,//3
+  //passenger_phone:this.user.phnumber,//4
+  //Bus_Name:this.bus.Bus_Name,//5
+  // "Bus_operator_id" : "sa12345",//6
+  // "Departure" : "19:20",//7
+  // "Arrival" : "21:10",//8
+  // "Total_price" : 500,//9
+  // "Ticket_price" : 500,//10
+  // "Source" : "Chennai",//11
+  // "Destination" : "Madurai",//12
+  // "Date" : "2020-06-27",//13
+  // "Seats" : [//14
   //         18
   // ],
-  // "Status" : "success"//11
+  // "Status" : "success"//15
   // }
   }
   ngOnInit(): void {
@@ -123,9 +143,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
 
 
-  let usersession=sessionStorage.getItem('userdata')
-  this.user=JSON.parse(usersession);
-  // console.log(this.user);
+
   this.addticket={user_id:this.user._id,ticket:this.ticket}
   this.service.addTickettoUser(this.addticket).subscribe((data)=>{
     console.log(data);
@@ -141,7 +159,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
 
 
-
+  
   document.getElementById(id).innerHTML='Paid'
   alert('Your ticket is booked.Click on view ticket to see your tickets(only users can view their tickets)');
 

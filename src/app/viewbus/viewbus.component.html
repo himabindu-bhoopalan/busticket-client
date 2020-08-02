@@ -1,57 +1,73 @@
 <app-navbar-bus-op></app-navbar-bus-op>
-<div class="container">
-  <div id="nodatafound">
+<div *ngIf="!loader" class="loader"></div>
+<div *ngIf="loader" class="container">
+  <div class="alert alert-danger">
+    <STRONG>NOTE:</STRONG>
+    <ol>
+      <li>YOU CAN <strong>RESERVE SEATS</strong> FOR THE CUSTOMER ONLY WHEN THE BUS IS <strong>APPROVED</strong> AND
+        PRIOR TO THE JOURNEY DATE .</li>
+      <li>YOU CAN <strong>MODIFY THE ROUTE</strong> DETAILS <strong>ONLY</strong> WHEN <strong>NO SEATS ARE
+          BOOKED</strong> FOR THAT PARTICULAR BUS.</li>
+    </ol>
+  </div>
+
+   
+
+  
+  <div *ngIf="busdata.length===null" id="nodatafound">
+    No buses found.Try adding buses in the addbus section.
   </div>
   <div class="col-lg-8" *ngFor="let bus of busdata">
     <div class="card ">
       <div class="card-header">
-       Approval Status: <span>{{bus.approval_status}}</span>
+        Approval Status: <span>{{bus.approval_status}}</span>
       </div>
       <div class="card-body">
-        <span class="location icons">    
-          <ul>
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-          </ul>
-        </span>
-        <!-- dep time, arr time, difference time -->
-        <span class="card-text dep-arr-diff">
+        <h5 class="card-title">Bus Name {{bus.Bus_Name}}</h5>
+        <p class="card-text">Bus operator {{bus.Bus_operator_id}}</p>
+        <ul>
+          <li><i class="fa fa-map-marker" aria-hidden="true"></i><strong>Source </strong>{{bus.Source}}</li>
+          <li> <i class="fa fa-map-marker" aria-hidden="true"></i><strong>Destination </strong>{{bus.Destination}}</li>
+          <li><strong>Date of Journey</strong>{{bus.Date}}</li>
+          <li><strong>Departure time </strong>{{bus.Departure}}</li>
+          <!-- <li>Time duration</li> -->
 
-          <ul>
-            <li>Departure time{{bus.Departure}}</li>
-            <li>Time duration{{bus.Departure}}-{{bus.Arrival}}</li>
-            <li>Arrival time{{bus.Arrival}}</li>
-          </ul>
-        </span>
-        <span class="title">
-          <h5 class="card-title">Bus Name {{bus.Bus_Name}}</h5>
-          <p class="card-text">Bus operator {{bus.Bus_operator_id}}</p>
-        </span>
+          <li><strong>Arrival time </strong>{{bus.Arrival}}</li>
+        </ul>
         <!-- to add price ,seats left ,book seat-->
         <span class="card-text price-seats-left">
           <ul>
             <li>
-              Price {{bus.Ticket_price}}
+              <strong>Price</strong> {{bus.Ticket_price}}
             </li>
             <li>
-              Seats left{{bus.seats_left}}
+              <strong>Seats left</strong>{{bus.seats_left}}
             </li>
           </ul>
 
-            <div class="container100" *ngIf="bus.approval_status=='approved' ">
-              <a href="#" [routerLink]="['/selectseats',bus._id]" class="btn btn-primary">
-                RESERVE SEATS
-              </a>
-           
-  
-            <!-- FOR MODIFYING IF SEATS LEFT ==20 THEN ENABLE THIS BUTTON-->
-              <div *ngIf="bus.seats_left==20&& bus.approval_status=='approved' ">
-                <button   data-toggle="modal" (click)="setbus(bus._id)" data-target="#exampleModal" class="btn btn-primary">MODIFY BUS DETAILS</button>
-              </div>
-             
-            </div>
-        
-        
+          <!--  THEN ENABLE THIS BUTTON  IF THE BUS IS APPROVED-->
+          <div id="reservebutton" *ngIf="bus.approval_status=='approved' ">
+
+            <button href="#" [routerLink]="['/selectseats',bus._id]" [disabled]="bus.journey_date_over"
+              class="btn btn-primary">
+              RESERVE SEATS
+            </button>
+            <span *ngIf="bus.journey_date_over"  class="alert alert-success" role="alert">
+              journey date is over
+            </span>
+          </div>
+
+
+
+          <!-- FOR MODIFYING IF SEATS LEFT ==20 THEN ENABLE THIS BUTTON-->
+          <div id="modifybutton" *ngIf="bus.seats_left==20 && bus.approval_status=='approved'">
+            <button data-toggle="modal" (click)="setbus(bus._id,bus.Source,bus.Destination,bus.Date,bus.Departure,bus.Arrival)" data-target="#exampleModal"
+              class="btn btn-primary">MODIFY BUS DETAILS</button>
+          </div>
+
+
+
+
 
         </span>
 
@@ -61,7 +77,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,54 +89,49 @@
       </div>
       <div class="modal-body">
         <form class="form-updatebus" [formGroup]="updatebusForm" (submit)="updatebus()">
-                       
-          <div class="form-group">
-            <label class="form-update" for="Bus_Name">Bus_Name</label>
-              <input type="text" id="Bus_Name" formControlName="Bus_Name" class="form-control"
-                  placeholder="" required autofocus>
 
-          </div>
           <div class="form-group">
             <label class="form-update" for="Source">Source</label>
-              <input type="text" id="Source" formControlName="Source" class="form-control"
-                  placeholder="" required autofocus>
+            <select  (change)="removeOption()" formControlName="Source" id="Source" class="form-control" value={{this.modalplaceholder.Source}}>
+              <option value="select" disabled>select</option>
+              <option [value]="src" *ngFor="let src of placesSource;let k=index;">{{src}}</option>
+          </select>
 
           </div>
           <div class="form-group">
             <label class="form-update" for="Destination">Destination</label>
-              <input type="text" id="Destination" formControlName="Destination" class="form-control"
-                  placeholder="" required autofocus>
+            <select formControlName="Destination" id="Destination" class="form-control" value={{this.modalplaceholder.Destination}}>
+              <option value="select" disabled>select</option>
+              <option  [value]="src"  *ngFor="let src of placesDestination;let i=index;">{{src}}</option>
+          </select>
 
           </div>
           <div class="form-group">
             <label class="form-update" for="Date">Date</label>
-              <input type="date" id="Date" formControlName="Date" class="form-control"
-                  placeholder="" required autofocus>
+            <input type="date" id="Date" formControlName="Date" min={{today}} class="form-control" value={{modalplaceholder.Date}}
+              >
 
           </div>
           <div class="form-group">
             <label class="form-update" for="Departure">Departure</label>
-              <input type="time" id="Departure" formControlName="Departure" class="form-control"
-                  placeholder="" required autofocus>
+            <input type="time" id="Departure" formControlName="Departure" class="form-control" value={{modalplaceholder.Departure}} >
 
           </div>
           <div class="form-group">
             <label class="form-update" for="Arrival">Arrival</label>
-              <input type="time" id="Arrival" formControlName="Arrival" class="form-control"
-                  placeholder="" required autofocus>
+            <input type="time" id="Arrival" formControlName="Arrival" class="form-control"  value={{modalplaceholder.Arrival}} >
 
           </div>
-         
-         
+
+
           <div class="form-group">
-              <input [disabled]="!updatebusForm.valid"   class="btn btn-danger"
-               type="submit" value="update">
+            <input [disabled]="!updatebusForm.valid" class="btn btn-danger" type="submit" value="update">
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      
+
       </div>
     </div>
   </div>

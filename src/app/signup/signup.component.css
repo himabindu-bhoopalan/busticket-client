@@ -1,9 +1,18 @@
 .info-text{
   margin-left: 18px;
   font-size:10px;
-  color:rgb(143, 10, 10)
+  color:white;
 }
-
+.container-fluid{
+  background: url(https://p4.wallpaperbetter.com/wallpaper/640/843/584/machine-macro-light-machine-wallpaper-preview.jpg) no-repeat center center fixed;
+  background-size: cover;
+  width:auto;
+  height:100vh;
+  
+}
+.myform{
+  margin-top:80px;
+}
 .btn{
   margin-left:40px;
 }
@@ -19,6 +28,7 @@
     font-weight: 600;
     color:#fff;
     padding: 8px 25px;
+    margin-left: 15px;
     }
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 

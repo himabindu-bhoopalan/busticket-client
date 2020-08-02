@@ -16,7 +16,7 @@ category:any=['User','Bus Operator']
   constructor(private user:BusticketService,private router:Router) { 
     this.userForm = new FormGroup({
       'category':new FormControl('',Validators.required),
-      'name':new FormControl(''),
+      'name':new FormControl('',Validators.required),
       'email':new FormControl('',Validators.email),
       'phnumber':new FormControl('',[Validators.minLength(10),Validators.maxLength(10)]),  
       'password':new FormControl('',[Validators.minLength(8),Validators.maxLength(32),Validators.required])
@@ -50,7 +50,7 @@ category:any=['User','Bus Operator']
 
     }
     else{
-      alert("please enter valid details")
+      alert("please enter valid details.Category,name and password are mandatory fields")
 
     }
   

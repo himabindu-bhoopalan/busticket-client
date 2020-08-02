@@ -11,6 +11,10 @@ export class SigninComponent implements OnInit {
   signinForm
   category:any=['User','Bus Operator']
   constructor(private busservice:BusticketService,private router:Router) {
+
+    //bus animation js code-start
+
+    //bus animation js code-end
     this.signinForm = new FormGroup({
       'category':new FormControl('',Validators.required),
       'userInput':new FormControl('',Validators.required),
@@ -34,10 +38,13 @@ export class SigninComponent implements OnInit {
     
     
     if(Number(this.signinForm.value.userInput)){
-        let b={phnumber:Number(this.signinForm.value.userInput)}
-        signin_data.push(b)
-        
-        // console.dir(signin_data);
+        if(this.signinForm.value.userInput.length!==10){alert('enter a valid 10 digit phone number');}else{
+          let b={phnumber:Number(this.signinForm.value.userInput)}
+          signin_data.push(b)
+          
+          // console.dir(signin_data);
+        }
+       
         
     }
     else if(this.signinForm.value.userInput.indexOf("@")!==-1 && this.signinForm.value.userInput.indexOf(".com")!==-1){

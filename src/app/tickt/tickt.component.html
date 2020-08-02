@@ -4,7 +4,12 @@
 <div *ngIf="!isBusoperator">
   <app-navbar-user></app-navbar-user>
 </div>
-
+<div class="alert alert-warning" role="alert">
+      
+  <div><b>ALERT:</b></div>
+  <p>Make sure the ticket contains passenger <strong>contact information</strong> incase of <strong>sudden cancellation</strong> of buses.
+   If the ticket does not contain your emergency contact information reach out to us through the toll-free number.  </p>
+</div>
 <!-- ticket -->
 <div class='container'>
     <div class="card" style="width: 18rem;">
@@ -21,6 +26,22 @@
               <tr>
                 <th class='ticket-text-heading'>Bus-Name</th>
                 <td class='ticket-text-info'>{{bus.Bus_Name}}</td>
+              </tr>
+              <tr>
+                <th class='ticket-text-heading'>Bus ID</th>
+                <td class='ticket-text-info'>{{bus.Bus_ID}}</td>
+              </tr>
+              <tr>
+                <th class='ticket-text-heading'>Passenger Name</th>
+                <td class='ticket-text-info'>{{user.name}}</td>
+              </tr>
+              <tr>
+                <th class='ticket-text-heading'>Passenger Email</th>
+                <td class='ticket-text-info'>{{user.email}}</td>
+              </tr>
+              <tr>
+                <th class='ticket-text-heading'>Passenger Phone</th>
+                <td class='ticket-text-info'>{{user.phnumber}}</td>
               </tr>
               <tr>
                 <th class='ticket-text-heading'>Price</th>
@@ -56,4 +77,5 @@
       <button  [disabled]="this.isBusoperator" routerLink="/trips" class="btn btn-primary">View Ticket</button>
     </div>
   
+    
 </div>

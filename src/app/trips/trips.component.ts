@@ -51,7 +51,7 @@ export class TripsComponent implements OnInit {
 
       } else {
         // console.log('could not fetch user ticket details');
-
+        alert('could not fetch user ticket details.try again..');
       }
 
       //separating the tickets based on current date and their date and status                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
@@ -92,9 +92,7 @@ export class TripsComponent implements OnInit {
           }
 
         }
-        // console.log(this.cancelledTickets);
-        // console.log(this.completedTickets);
-        // console.log(this.upcomingTickets);
+       
 
       })
     })
@@ -103,8 +101,14 @@ export class TripsComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-  cancelTicket(id, index) {
+  cancelTicket(id, index,seats,busname,busid,source,destination) {
     let ticketid = id
+    let countservicecalled=0;
+    let seatsbooked=seats;
+    let busname1=busname;
+    let busid1=busid;
+    let src=source;
+    let dest=destination
     var j = index
     // console.log('the index'+j);
     let g = new Date()
@@ -118,18 +122,22 @@ export class TripsComponent implements OnInit {
         // console.log(data);
         this.cancel = data
         if (this.cancel.status == 200) {
+          countservicecalled+=1;
           // console.log('ticket cancelled in passenger db');
          
         } else {
           // console.log('ticket not cancelled in passenger db');
         }
       })
+
+
       //another put request to tickets db 
       let obj2={"ticketid":ticketid}
       this.service.Ticketdb(obj2).subscribe((data) => {
         // console.log(data);
         this.cancel2 = data
         if (this.cancel2.status == 200) {
+          countservicecalled+=1;
           // console.log('ticket cancelled in ticket db');
           
         } else {
@@ -137,8 +145,33 @@ export class TripsComponent implements OnInit {
         }
       })
 
-      document.getElementById("cancel" + j).innerHTML = "Cancelled"
+      let obj3={"seats":seatsbooked,"Bus_Name":busname1,"Bus_ID":busid1,"Source":src,"Destination":dest}
+      console.log('obj3');
+      console.dir(obj3);  
+      //update the seats to available in the bus
+      this.service.cancelled_seat_available(obj3).subscribe((data) => {
+        // console.log(data);
+        this.cancel2 = data
+        if (this.cancel2.status == 200) {
+          countservicecalled+=1;
+          console.log('seats changed to available in bus db');
+          
+        } else {
+          console.log('seats not changed to available in bus db');
+        }
+      })
+
+      
+      // if(countservicecalled==3){
+      // document.getElementById("cancel" + String(j)).innerHTML = "Cancelled";
       alert('Your ticket has been cancelled.You can find it in cancelled tickets.')
+      location.reload();
+      // }else if(countservicecalled==0){
+      //   alert('The ticket was not cancelled.please try again.')
+      // }else{
+      //   alert('The ticket was not cancelled properly.')
+      // }
+      
 
     }
     else {

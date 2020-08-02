@@ -4,11 +4,17 @@
         <div class="col-lg-10">
           <span class='from'>
             <label for="">From</label>
-            <input type="text" formControlName="Source" class="form-control">
+            <select  (change)="removeOption()" formControlName="Source" id="Source" class="form-control">
+              <option value="select" disabled>select</option>
+              <option [value]="src" *ngFor="let src of placesSource">{{src}}</option>
+          </select>
             <label for="">To</label>
-            <input type="text" formControlName="Destination" class="form-control">
+            <select formControlName="Destination" id="Destination" class="form-control">
+              <option value="select" disabled>select</option>
+              <option  [value]="src"  *ngFor="let src of placesDestination">{{src}}</option>
+          </select>
             <label for="">Date</label>
-            <input type="date" formControlName="Date" class="form-control">
+            <input type="date" formControlName="Date" min="{{today}}" class="form-control">
           </span> 
           <div class="col-lg-3">
             <input type="submit" [disabled]="!findForm.valid" value='Find Buses' class="btn btn-danger">
@@ -20,6 +26,26 @@
 <div>
   <i class="fa fa-map-marker" aria-hidden="true"></i>
 </div>  
+<section class="suggestion alert alert-primary" role="alert">
+    <h6>suggested bus info</h6>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Source</th>
+          <th scope="col">Destination</th>
+          <th scope="col">Date</th>
+        </tr>
+      </thead>
+      <tbody >
+        
+        <tr *ngFor="let buses of initial_busdata">
+          <td>{{buses.Source}}</td>
+          <td>{{buses.Destination}}</td>
+          <td>{{buses.Date}}</td>
+        </tr>
+      </tbody>
+    </table>
+</section>
 
 <div class="col-lg-8" *ngFor="let bus of bus_data">
   <div class="card ">
@@ -33,24 +59,29 @@
             <i class="fa fa-map-marker" aria-hidden="true"></i>
           </ul>
         </span>
-        <!-- dep time, arr time, difference time -->
-        <span class="card-text dep-arr-diff">
-         
-          <ul>
-            <li>Departure time{{bus.Departure}}</li>
-            <li>Time duration{{bus.Departure}}-{{bus.Arrival}}</li>
-            <li>Arrival time{{bus.Arrival}}</li>
-          </ul>
-        </span>
+       
         <span class="title">
           <h5 class="card-title">Bus Name {{bus.Bus_Name}}</h5>
           <p class="card-text">Bus operator {{bus.Bus_operator_id}}</p> 
+        </span>
+
+         <!-- dep time, arr time, difference time -->
+         <span class="card-text dep-arr-diff">
+         
+          <ul>
+            <li>Departure time{{bus.Departure}}</li>
+            <!-- <li>Time duration{{bus.Departure}}-{{bus.Arrival}}</li> -->
+            <li>Arrival time{{bus.Arrival}}</li>
+          </ul>
         </span>
         <!-- to add price ,seats left ,book seat-->
         <span class="card-text price-seats-left">
           <ul>
             <li>
               Price {{bus.Ticket_price}}
+            </li>
+            <li>
+              Date of Journey {{bus.Date}}
             </li>
             <li>
               <a href="#" [routerLink]="['/selectseats',bus._id]" class="btn btn-primary">SELECT SEATS</a>

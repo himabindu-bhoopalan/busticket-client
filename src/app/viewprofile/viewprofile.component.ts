@@ -32,24 +32,28 @@ export class ViewprofileComponent implements OnInit {
   }
    update(){
     
-    this.updateForm.value._id= this.user_data._id
-    // console.log(this.updateForm.value);
-    //call service update it and then navigate to home page 
-    this.service.updateprofile(this.updateForm.value).subscribe((data)=>{
-      // console.log(data);
-      if(data.status==200){
-        this.router.navigate(['/signin']);
-        alert('User details updated.Please login with new details');
+
+      this.updateForm.value._id= this.user_data._id
+      // console.log(this.updateForm.value);
+      //call service update it and then navigate to home page 
+      this.service.updateprofile(this.updateForm.value).subscribe((data)=>{
+        // console.log(data);
+        if(data.status==200){
+          
+          alert('User details updated.Please login with new details');
+          this.router.navigate(['/signin']);
+          setTimeout(function(){ location.reload(); }, 1000);
+         
         
+          
+        }else{
+          alert('Update not successful,try again or didnt add any new updated details.');
+        }
        
-      
-        
-      }else{
-        alert('Update not successful,try again or didnt add any new updated details.');
-      }
-     
-    })
-   }
+      })
+    }
+   
+   
   
   
 }

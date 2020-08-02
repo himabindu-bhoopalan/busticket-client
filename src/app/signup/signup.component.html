@@ -1,8 +1,10 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container-fluid">
+   <div class="Animation">
+   </div>
    <div class="row">
-      <div class="col-md-4 mx-auto">
-         <div class="myform form ">
+      <div class="col-lg-4 mx-auto">
+         <div class="myform form">
             <form [formGroup]="userForm" name="login" (submit)="sendData()">
             
                   <select class="form-control my-input" (change)="changeCity($event)" formControlName="category">
@@ -11,8 +13,9 @@
                    </select>
               
                <div >
-                  <input type="text" formControlName="name" name="name" class="form-control my-input" id="name" placeholder="Name">
+                 <input type="text" formControlName="name" name="name" class="form-control my-input" id="name" placeholder="Name">
                </div>
+               
                <div >
                   <input type="email" formControlName="email" name="email" class="form-control my-input" id="email" placeholder="Email">
                </div>
@@ -25,14 +28,14 @@
                      placeholder="password">
                </div>
                <div class="info-text">
-                  <label for="pass">      should have length between (8-32).</label>  
+                  <label for="pass">password's length should be between (8-32).Category,Name and password fields are mandatory.</label>  
                </div>
                <div class="text-center ">
                   <button  type="submit" class=" btn btn-block send-button tx-tfm">Create Your Free Account</button>
                </div>  
-               {{userForm.valid}}
+               <!-- {{userForm.valid}} -->
             </form>
-         </div>
+            </div>
       </div>
    </div>
 </div>

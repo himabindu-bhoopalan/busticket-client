@@ -64,9 +64,7 @@ export class SeatsComponent implements OnInit {
     location.reload();
   }
   ar(seatno) {
-    //for every selected seat we should a service that goes and checks if the total seats booked 
     //for this bus and user has tickets >=10 then show the alert
-    //ofcourse this will be a update v.2
     if (this.seatscount >= 10) {
       alert('Can book only upto 10 seats.. ');
     } else {

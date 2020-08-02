@@ -15,7 +15,8 @@
 .card{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     /* border-radius: 10%; */
-    height:500px;
+    height:650px;
+    margin-bottom:100px;
 }
 .container{
     display:flex;
@@ -43,4 +44,14 @@ h5{
 }
 .btn.btn-primary{
     background-color:rgb(117, 28, 28);
+}
+.alert.alert-warning{
+    width: 831px;
+   justify-content: center;
+   margin-left: 122px;
+   margin-bottom:40px;
+   margin-top:50px;
+}
+.ticket-id{
+    margin-right:5px;
 }

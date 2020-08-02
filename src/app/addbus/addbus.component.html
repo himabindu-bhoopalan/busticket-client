@@ -1,49 +1,65 @@
 <app-navbar-bus-op></app-navbar-bus-op>
 <div class="container">
-    <form [formGroup]="busForm" (submit)="sendData()">
-        <div class="col-lg-4">
-            <label for="">Bus operator</label>
-            <input type="text" formControlName="Bus_operator_id" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Bus Name</label>
-            <input type="text" formControlName="Bus_Name" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Bus ID</label>
-            <input type="text" formControlName="Bus_Name" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Date</label>
-            <input type="date" formControlName="Date" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Departure</label>
-            <input type="time" formControlName="Departure" class="form-control">
-        </div>
+    <div class="card">
+        <div class="card-body">
+        <form [formGroup]="busForm" (submit)="sendData()">
+            <div class="row">
+            <div class="col">
+                <div class="col-lg-6 form-input">
+                    <label for="">Bus operator</label>
+                    <input type="text" id="Bus_operator_id" formControlName="Bus_operator_id" class="form-control" />
+                </div>
+                <div class="col-lg-6 form-input">
+                    <label for="">Bus Name</label>
+                    <input type="text" id="Bus_Name" formControlName="Bus_Name" class="form-control" />
+                </div>
+                <div class="col-lg-6 form-input">
+                    <label for="">Bus ID</label>
+                    <input type="text" id="Bus_ID" formControlName="Bus_ID" class="form-control" />
+                </div>
+                <div class="col-lg-6 form-input">
+                    <label for="">Date</label>
+                    <input type="Date" id="Date1" min="{{today}}" formControlName="Date" class="form-control" />
+                </div>
+                <div class="col-lg-6 form-input">
+                    <label for="">Departure</label>
+                    <input type="time" id="Departure" formControlName="Departure" class="form-control" />
+                </div>
+            </div>
+            <div class="col">
+                <div class="col-lg-6 form-input">
+                    <label for="">Arrival</label>
+                    <input type="time" id="Arrival" formControlName="Arrival" class="form-control" />
+                </div>
 
-        <div class="col-lg-4">
-            <label for="">Arrival</label>
-            <input type="time" formControlName="Arrival" class="form-control">
+                <div class="col-lg-6 form-input">
+                    <label for="Source">Source</label>
+                    <select  (change)="removeOption()" formControlName="Source" id="Source" class="form-control">
+                        <option value="select" disabled>select</option>
+                        <option [value]="src" *ngFor="let src of placesSource;let k=index;">{{src}}</option>
+                    </select>
+                    <!-- <input type="text" id="Source"  class="form-control" /> -->
+                </div>
+               
+                <div class="col-lg-6 form-input">
+                    <label for="Destination">Destination</label>
+                    <select formControlName="Destination" id="Destination" class="form-control">
+                        <option value="select" disabled>select</option>
+                        <option  [value]="src"  *ngFor="let src of placesDestination;let i=index;">{{src}}</option>
+                    </select>
+                    <!-- <input type="text" id="Destination" formControlName="Destination" class="form-control" /> -->
+                </div>
+                <div class="col-lg-6 form-input">
+                    <label for="">Price</label>
+                    <input type="number" id="Ticket_price" formControlName="Ticket_price" class="form-control" />
+                </div>
+                <div class="info-text">All the fields are mandatory</div>
+                <div class="col-lg-4 form-input">
+                    <input type="submit" id="submitbutton" text='Add Bus' class="btn-btn-danger" />
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-4">
-            <label for="">Source</label>
-            <input type="text" formControlName="Source" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Destination</label>
-            <input type="text" formControlName="Destination" class="form-control">
-        </div>
-        <div class="col-lg-4">
-            <label for="">Price</label>
-            <input type="number" formControlName="Ticket_price" class="form-control">
-        </div>
-        <div class="col-lg-3">
-            <input type="submit" text='Add Bus' class="btn-btn-danger">
-        </div>
-
-    </form>
+        </form>
+    </div>
 </div>
-
-
+</div>

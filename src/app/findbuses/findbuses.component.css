@@ -24,3 +24,14 @@ i{
 .title{
     display:flex;
 }
+.card-title{
+    margin: 0px 0px 0px 87px;
+}
+.card-text{
+    margin-left:50px;
+}
+.suggestion{
+    width:500px;
+    font-size:10px;
+    margin: 50px 100px 100px 367px;
+}
