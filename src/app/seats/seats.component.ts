@@ -115,9 +115,9 @@ export class SeatsComponent implements OnInit {
         if (data.status == 200) {
           let userdata = data.user_data
           sessionStorage.setItem('user_data', JSON.stringify(userdata));
-          location.reload();
+         
         }else{
-          document.getElementById('message').innerHTML='user not found'
+          document.getElementById('message').innerText='user not found'
           location.reload();
         }
       })

@@ -31,18 +31,36 @@
                 <th class='ticket-text-heading'>Bus ID</th>
                 <td class='ticket-text-info'>{{bus.Bus_ID}}</td>
               </tr>
-              <tr>
-                <th class='ticket-text-heading'>Passenger Name</th>
-                <td class='ticket-text-info'>{{user.name}}</td>
-              </tr>
-              <tr>
-                <th class='ticket-text-heading'>Passenger Email</th>
-                <td class='ticket-text-info'>{{user.email}}</td>
-              </tr>
-              <tr>
-                <th class='ticket-text-heading'>Passenger Phone</th>
-                <td class='ticket-text-info'>{{user.phnumber}}</td>
-              </tr>
+              <div *ngIf="isBusoperator">
+                  <!-- for reservation -->
+                  <tr  >
+                    <th class='ticket-text-heading'>Passenger Name</th>
+                    <td class='ticket-text-info'>{{user_reserve.name}}</td>
+                  </tr>
+                  <tr>
+                    <th class='ticket-text-heading'>Passenger Email</th>
+                    <td class='ticket-text-info'>{{user_reserve.email}}</td>
+                  </tr>
+                  <tr>
+                    <th class='ticket-text-heading'>Passenger Phone</th>
+                    <td class='ticket-text-info'>{{user_reserve.phnumber}}</td>
+                  </tr>
+              </div>
+              <div *ngIf="!isBusoperator">
+                <!-- for reservation -->
+                <tr  >
+                  <th class='ticket-text-heading'>Passenger Name</th>
+                  <td class='ticket-text-info'>{{user.name}}</td>
+                </tr>
+                <tr>
+                  <th class='ticket-text-heading'>Passenger Email</th>
+                  <td class='ticket-text-info'>{{user.email}}</td>
+                </tr>
+                <tr>
+                  <th class='ticket-text-heading'>Passenger Phone</th>
+                  <td class='ticket-text-info'>{{user.phnumber}}</td>
+                </tr>
+            </div>
               <tr>
                 <th class='ticket-text-heading'>Price</th>
                 <td class='ticket-text-info'>{{total_bill}}</td>

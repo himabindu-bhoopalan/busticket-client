@@ -19,18 +19,25 @@ user
 updateseats
 addticket
 all_seats
-isBusoperator:Boolean=false
+isBusoperator:Boolean=false;
+Reservation:Boolean=false;
+user_reserve
   constructor(private service:BusticketService) { 
     if(sessionStorage.getItem('busopdata')){
       this.isBusoperator=true;
+      console.log('this is bus operator');
+      this.user_reserve=JSON.parse(sessionStorage.getItem('user_data'));
     }
     console.log('inside the constructor');
 
-    //get user details
-    let usersession=sessionStorage.getItem('userdata')
-    this.user=JSON.parse(usersession);
-    console.log(this.user);
+    //get user details-for user component
+    if(!this.isBusoperator){
+      let usersession=sessionStorage.getItem('userdata')
+      this.user=JSON.parse(usersession);
+      console.log(this.user);
 
+    }
+    
     //getting seats
     let seatlist =sessionStorage.getItem('seats')
     this.seat=JSON.parse(seatlist);
