@@ -20,8 +20,8 @@ export class ViewprofileComponent implements OnInit {
       this.updateForm = new FormGroup({
         'Id':new FormControl(this.user_data.unique_id,[Validators.minLength(7)]),
         'Name':new FormControl(this.user_data.name,),
-        'Email':new FormControl(this.user_data.email,),
-        'Phone':new FormControl(this.user_data.phnumber,[Validators.maxLength(10)])
+        'Email':new FormControl(this.user_data.email,Validators.email),
+        'Phone':new FormControl(this.user_data.phnumber,[Validators.maxLength(10),Validators.minLength(10)])
       })
      
   }
@@ -31,14 +31,10 @@ export class ViewprofileComponent implements OnInit {
      
   }
    update(){
-     console.log(this.updateForm.value);
-      // if(this.updateForm.value.Phone!=null && this.updateForm.value.Phone!=undefined && this.updateForm.value.Phone!=""){
-      //   if(String(this.updateForm.value.Phone).length<10||String(this.updateForm.value.Phone).length>10){
-      //     alert('Phone number length should be 10');
-      //   }
-      // else{ 
+    console.log(this.updateForm.value);
+     if(this.updateForm.valid){
 
-        
+
       this.updateForm.value._id= this.user_data._id
       // console.log(this.updateForm.value);
       //call service update it and then navigate to home page 
@@ -58,11 +54,17 @@ export class ViewprofileComponent implements OnInit {
        
       })
 
+      }else{
+        alert("Enter valid form details.Phone should be of length 10 and valid email id" );
       }
-
+     }
+     
+      // if(this.updateForm.value.Phone!=null && this.updateForm.value.Phone!=undefined && this.updateForm.value.Phone!=""){
+      //   if(String(this.updateForm.value.Phone).length<10||String(this.updateForm.value.Phone).length>10){
+      //     alert('Phone number length should be 10');
+      //   }
+      // else{ 
   //   }
-   
-   
   //  }
   
 }
