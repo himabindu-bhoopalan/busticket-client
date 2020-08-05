@@ -27,7 +27,7 @@ isBusoperator:Boolean=false
     console.log('inside the constructor');
 
     //get user details
-    let usersession=sessionStorage.getItem('user_data')
+    let usersession=sessionStorage.getItem('userdata')
     this.user=JSON.parse(usersession);
     console.log(this.user);
 
