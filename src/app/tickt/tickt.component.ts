@@ -157,7 +157,9 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
 
 
-
+  if(this.isBusoperator){
+    this.addticket={user_id:this.user_reserve._id,ticket:this.ticket}
+  }
   this.addticket={user_id:this.user._id,ticket:this.ticket}
   this.service.addTickettoUser(this.addticket).subscribe((data)=>{
     console.log(data);

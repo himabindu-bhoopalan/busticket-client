@@ -126,7 +126,8 @@ export class SeatsComponent implements OnInit {
           console.log(bus1.all_seats);
           sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
           this.router.navigate(['/ticket']);
-          
+          location.reload();
+
         }else{
           alert('User not found!');
           location.reload();
