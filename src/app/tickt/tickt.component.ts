@@ -41,6 +41,7 @@ user_reserve
     //getting seats
     let seatlist =sessionStorage.getItem('seats')
     this.seat=JSON.parse(seatlist);
+    console.log('seats array from session storage'+this.seat);
 
     //getting bus details
     let busdata=sessionStorage.getItem('busData')
@@ -96,7 +97,7 @@ user_reserve
     } 
     }
   
-  console.log(this.ticket);
+  console.log('ticket'+this.ticket);
 
   }
   ngOnInit(): void {

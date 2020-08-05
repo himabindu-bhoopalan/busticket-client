@@ -73,11 +73,20 @@ export class SeatsComponent implements OnInit {
     if (this.seatscount >= 10) {
       alert('Can book only upto 10 seats.. ');
     } else {
-      document.getElementById(seatno).style.backgroundColor = 'green';
-      if(!(seatno in this.seatnumbers)){
-        this.seatscount++;
-        this.seatnumbers.push(seatno);
-        console.log(this.seatscount, this.seatnumbers);
+      if( document.getElementById(seatno).style.backgroundColor =='green'){
+        document.getElementById(seatno).style.backgroundColor ='red';
+        let index=this.seatnumbers.indexOf(seatno);
+        this.seatscount--;
+        this.seatnumbers.splice(index,1);
+        console.log(this.seatnumbers);
+      }else{
+        document.getElementById(seatno).style.backgroundColor = 'green';
+        if(!(seatno in this.seatnumbers)){
+          this.seatscount++;
+          this.seatnumbers.push(seatno);
+          console.log(this.seatscount, this.seatnumbers);
+        }
+       
       }
      
     }
@@ -115,26 +124,24 @@ export class SeatsComponent implements OnInit {
         if (data.status == 200) {
           let userdata = data.user_data
           sessionStorage.setItem('user_data', JSON.stringify(userdata));
-          
-          console.log(s);
-          sessionStorage.setItem('seats', JSON.stringify(s));
-          let busdata = sessionStorage.getItem('busData');
-          let bus1 = JSON.parse(busdata);
-          s.forEach(element => {
-            bus1.all_seats[String(element)] = "Booked";
-          });
-          console.log(bus1.all_seats);
-          sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
-          this.router.navigate(['/ticket']);
-          setTimeout(function(){ location.reload(); }, 1000);
-         
-
         }else{
           alert('User not found!');
           location.reload();
         }
       })
-
+      console.log(s);
+      sessionStorage.setItem('seats', JSON.stringify(this.seatnumbers));
+      
+      let busdata = sessionStorage.getItem('busData');
+      let bus1 = JSON.parse(busdata);
+      s.forEach(element => {
+        bus1.all_seats[String(element)] = "Booked";
+      });
+      console.log(bus1.all_seats);
+      sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
+      this.router.navigate(['/ticket']);
+      setTimeout(function(){ location.reload(); }, 1000);
+     
     }
     
  
