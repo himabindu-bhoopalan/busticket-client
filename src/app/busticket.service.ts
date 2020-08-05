@@ -64,7 +64,7 @@ export class BusticketService {
    
    findBus(data):Observable<any>{
      console.log('findbus service');
-    //  console.log(data);
+     console.log(data);
     // return this.http.post('http://localhost:3040/findbus',data);
      return this.http.post('https://busnode.herokuapp.com/findbus',data);
    }
@@ -125,7 +125,7 @@ export class BusticketService {
 
   updateSeats(data):Observable<any>{
     console.log('inside update seats in bus db');
-    // console.dir(data);
+    console.dir(data);
     // return this.http.put('http://localhost:3040/updateseats',data);
     return this.http.put('https://busnode.herokuapp.com/updateseats',data);
   }

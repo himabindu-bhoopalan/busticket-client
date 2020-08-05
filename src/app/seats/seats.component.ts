@@ -106,13 +106,12 @@ export class SeatsComponent implements OnInit {
       //service to get user id only ..
       this.service.get_user_id(this.user_data).subscribe((data) => {
         if (data.status == 200) {
-
-          let object_id = data.userid
-          let userdata = { "_id": object_id }
-          sessionStorage.setItem('userdata', JSON.stringify(userdata));
-          location.reload()
+          let userdata = data.user_data
+          sessionStorage.setItem('user_data', JSON.stringify(userdata));
+          location.reload();
         }else{
           alert('user not found');
+          location.reload();
         }
       })
 
