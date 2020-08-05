@@ -53,24 +53,49 @@ user_reserve
 
     //generate ticket-id
     this.ticketid=this.generate_id(this.bus.Source,this.bus.Destination)
-    this.ticket={
-      ticketid:this.ticketid, //1       
-      passenger_name:this.user.name,//2
-      passenger_email:this.user.email,//3
-      passenger_phone:this.user.phnumber,//4
-      Bus_Name:this.bus.Bus_Name,//5
-      Bus_ID:this.bus.Bus_ID,//5
-      Bus_operator_id:this.bus.Bus_operator_id,//6
-      Departure:this.bus.Departure,//7
-      Arrival:this.bus.Arrival,//8
-      Total_price:this.total_bill,//9
-      Ticket_price:this.bus.Ticket_price,//10
-      Source:this.bus.Source,//11
-      Destination:this.bus.Destination,//12
-      Date:this.bus.Date,//13
-      Seats:this.seat,//14
-      Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
-  }
+    if(this.isBusoperator){
+      //for reservation
+      this.ticket={
+        ticketid:this.ticketid, //1       
+        passenger_name:this.user_reserve.name,//2
+        passenger_email:this.user_reserve.email,//3
+        passenger_phone:this.user_reserve.phnumber,//4
+        Bus_Name:this.bus.Bus_Name,//5
+        Bus_ID:this.bus.Bus_ID,//5
+        Bus_operator_id:this.bus.Bus_operator_id,//6
+        Departure:this.bus.Departure,//7
+        Arrival:this.bus.Arrival,//8
+        Total_price:this.total_bill,//9
+        Ticket_price:this.bus.Ticket_price,//10
+        Source:this.bus.Source,//11
+        Destination:this.bus.Destination,//12
+        Date:this.bus.Date,//13
+        Seats:this.seat,//14
+        Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    }
+    }else{
+
+      //for user
+      this.ticket={
+        ticketid:this.ticketid, //1       
+        passenger_name:this.user.name,//2
+        passenger_email:this.user.email,//3
+        passenger_phone:this.user.phnumber,//4
+        Bus_Name:this.bus.Bus_Name,//5
+        Bus_ID:this.bus.Bus_ID,//5
+        Bus_operator_id:this.bus.Bus_operator_id,//6
+        Departure:this.bus.Departure,//7
+        Arrival:this.bus.Arrival,//8
+        Total_price:this.total_bill,//9
+        Ticket_price:this.bus.Ticket_price,//10
+        Source:this.bus.Source,//11
+        Destination:this.bus.Destination,//12
+        Date:this.bus.Date,//13
+        Seats:this.seat,//14
+        Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    } 
+    }
+  
   console.log(this.ticket);
 
   }

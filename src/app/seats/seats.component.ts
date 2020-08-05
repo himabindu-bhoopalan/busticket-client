@@ -115,25 +115,27 @@ export class SeatsComponent implements OnInit {
         if (data.status == 200) {
           let userdata = data.user_data
           sessionStorage.setItem('user_data', JSON.stringify(userdata));
-         
+          
+          console.log(s);
+          sessionStorage.setItem('seats', JSON.stringify(s));
+          let busdata = sessionStorage.getItem('busData');
+          let bus1 = JSON.parse(busdata);
+          s.forEach(element => {
+            bus1.all_seats[String(element)] = "Booked";
+          });
+          console.log(bus1.all_seats);
+          sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
+          this.router.navigate(['/ticket']);
+          
         }else{
-          document.getElementById('message').innerText='user not found'
+          alert('User not found!');
           location.reload();
         }
       })
 
     }
     
-    console.log(s);
-    sessionStorage.setItem('seats', JSON.stringify(s));
-    let busdata = sessionStorage.getItem('busData');
-    let bus1 = JSON.parse(busdata);
-    s.forEach(element => {
-      bus1.all_seats[String(element)] = "Booked";
-    });
-    console.log(bus1.all_seats);
-    sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
-    this.router.navigate(['/ticket']);
+ 
   }
 
 }
