@@ -65,25 +65,7 @@ isBusoperator:Boolean=false
       Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
   }
   console.log(this.ticket);
-  // "_id" : ObjectId("5f01feb4d90bc313286ddd7e"),
-  // "ticketid" : "CheMad19293",//1
-  //passenger_name:this.user.name,//2
-  //passenger_email:this.user.email,//3
-  //passenger_phone:this.user.phnumber,//4
-  //Bus_Name:this.bus.Bus_Name,//5
-  // "Bus_operator_id" : "sa12345",//6
-  // "Departure" : "19:20",//7
-  // "Arrival" : "21:10",//8
-  // "Total_price" : 500,//9
-  // "Ticket_price" : 500,//10
-  // "Source" : "Chennai",//11
-  // "Destination" : "Madurai",//12
-  // "Date" : "2020-06-27",//13
-  // "Seats" : [//14
-  //         18
-  // ],
-  // "Status" : "success"//15
-  // }
+
   }
   ngOnInit(): void {
     

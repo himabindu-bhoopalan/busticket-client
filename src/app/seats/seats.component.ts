@@ -42,7 +42,7 @@ export class SeatsComponent implements OnInit {
       console.log('the bus id ' + this.id);
     });
 
-    
+
     //get the bus details 
     this.service.findbusone(this.id).subscribe((data) => {
       this.busData = data;
@@ -108,6 +108,8 @@ export class SeatsComponent implements OnInit {
         console.dir(this.user_data);
 
       }
+
+      //no use of this below service --later going to delete
       //service to get user id only ..
       this.service.get_user_id(this.user_data).subscribe((data) => {
         if (data.status == 200) {
@@ -115,7 +117,7 @@ export class SeatsComponent implements OnInit {
           sessionStorage.setItem('user_data', JSON.stringify(userdata));
           location.reload();
         }else{
-          alert('user not found');
+          document.getElementById('message').innerHTML='user not found'
           location.reload();
         }
       })
