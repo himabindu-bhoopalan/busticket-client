@@ -115,7 +115,7 @@ user_reserve
   }
 AddTicket(id){
 //service-1 :write code here to send a service to update ticket db 
-//service-2 :to update the seats in the bus..
+//service-2 :to update the seats in the bus.
 //service-3 :also should be added in passenger db service -3
 
 // console.log('3 services here ');
@@ -158,9 +158,13 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
 
   if(this.isBusoperator){
+    this.user_reserve=JSON.parse(sessionStorage.getItem('user_data'))
     this.addticket={user_id:this.user_reserve._id,ticket:this.ticket}
+  }else{
+    this.user=JSON.parse(sessionStorage.getItem('userdata'))
+    this.addticket={user_id:this.user._id,ticket:this.ticket}
   }
-  this.addticket={user_id:this.user._id,ticket:this.ticket}
+ 
   this.service.addTickettoUser(this.addticket).subscribe((data)=>{
     console.log(data);
     if(this.res.status==200){
@@ -168,7 +172,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
       this.count1++;
       
     }else{
-      // console.log('ticket not added to user db');
+      alert('ticket not added to user db');
     }
   }) 
   
