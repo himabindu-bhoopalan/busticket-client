@@ -26,18 +26,23 @@ export class SeatsComponent implements OnInit {
       'userInput': new FormControl('', Validators.required)
     })
 
-    if (sessionStorage.getItem('userdata')) {
+    if (sessionStorage.getItem('userdata')!=null) {
       this.user = true;
+      console.log('this is user');
     }
-    if (sessionStorage.getItem('busopdata')) {
+    if (sessionStorage.getItem('busopdata')!=null) {
       this.user = false;
+      console.log('this is bus operator');
     }
+
+
     //get bus id from previous page 
     this.bus = this.route.params.subscribe(params => {
       this.id = params['id']
       console.log('the bus id ' + this.id);
     });
 
+    
     //get the bus details 
     this.service.findbusone(this.id).subscribe((data) => {
       this.busData = data;
