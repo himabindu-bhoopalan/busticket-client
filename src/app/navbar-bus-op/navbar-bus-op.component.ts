@@ -23,5 +23,7 @@ user
       this.router.navigate(["/addbus"]);
     }
   }
- 
+  reset(){
+    sessionStorage.clear();
+  }
 }

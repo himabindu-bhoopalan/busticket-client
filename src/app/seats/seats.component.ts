@@ -22,11 +22,13 @@ export class SeatsComponent implements OnInit {
   isTaken:Boolean=false
   constructor(private route: ActivatedRoute, private service: BusticketService, private router: Router) {
 
+    //reserve form
     this.reserveForm = new FormGroup({
       'userInput': new FormControl('', Validators.required)
     })
 
-    if (sessionStorage.getItem('userdata')!=null) {
+    //used to disable confirm and reserve options 
+    if (sessionStorage.getItem('userdata')!=null && sessionStorage.getItem('user_data')==null) {
       this.user = true;
       console.log('this is user');
     }
@@ -65,9 +67,12 @@ export class SeatsComponent implements OnInit {
   ngOnInit(): void {
 
   }
+  //reset button 
   refresh() {
     location.reload();
+    
   }
+ 
   ar(seatno) {
     //for this bus and user has tickets >=10 then show the alert
     if (this.seatscount >= 10) {
@@ -93,8 +98,13 @@ export class SeatsComponent implements OnInit {
 
   }
   confirm(s) {
+    if(this.seatnumbers.length==0){
+      alert('No seats booked.')
+    }else{
+      //first valid else
 
-    //bus operator reserve seats form
+
+        //bus operator reserve seats form-start
     if (this.reserveForm.value.userInput) {
       console.log('reserve form is getting executed');
       
@@ -118,32 +128,60 @@ export class SeatsComponent implements OnInit {
 
       }
 
-      //no use of this below service --later going to delete
-      //service to get user id only ..
+     
+      //service to get user details only ..
       this.service.get_user_id(this.user_data).subscribe((data) => {
         if (data.status == 200) {
           let userdata = data.user_data
           sessionStorage.setItem('user_data', JSON.stringify(userdata));
         }else{
           alert('User not found!');
-          location.reload();
+          let busidata=JSON.parse(sessionStorage.getItem('busData'))
+          console.log(busidata);
+          console.log(busidata._id);
+          this.router.navigate(['selectseats',busidata._id]);
+          // location.reload();
         }
       })
-      console.log(s);
-      sessionStorage.setItem('seats', JSON.stringify(this.seatnumbers));
-      
-      let busdata = sessionStorage.getItem('busData');
-      let bus1 = JSON.parse(busdata);
-      s.forEach(element => {
-        bus1.all_seats[String(element)] = "Booked";
-      });
-      console.log(bus1.all_seats);
-      sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
-      this.router.navigate(['/ticket']);
-      setTimeout(function(){ location.reload(); }, 1000);
      
+    } //bus operator reserve seats form-end
+    
+    
+
+    //common procedure for bus op and user i.e 
+    //1) storing "s"==seats array and 
+    //2) 2.a)changing all_seats arrayof this bus object and 2.b)storing them too
+
+    //1
+    console.log(s+"seat array")
+    sessionStorage.setItem('seats', JSON.stringify(s));
+
+    //2.a
+    let bus1 = JSON.parse(sessionStorage.getItem('busData'));
+    s.forEach(element => {
+      bus1.all_seats[String(element)] = "Booked";
+    });
+
+    //2.b
+    console.log(bus1.all_seats);
+    sessionStorage.setItem('allseats', JSON.stringify(bus1.all_seats))
+
+    //going to next page
+    this.router.navigate(['/ticket']);
+
+    //only if reserve form is thr reload is need so condition
+
+    if(!this.user){
+      setTimeout(function(){ location.reload(); }, 2000);
     }
     
+
+
+
+
+    }
+
+  
  
   }
 

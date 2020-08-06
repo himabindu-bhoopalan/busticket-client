@@ -33,7 +33,7 @@ export class ViewprofileComponent implements OnInit {
    update(){
     console.log(this.updateForm.value);
      if(this.updateForm.valid){
-
+        
 
       this.updateForm.value._id= this.user_data._id
       // console.log(this.updateForm.value);

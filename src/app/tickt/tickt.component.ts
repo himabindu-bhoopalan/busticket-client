@@ -11,7 +11,7 @@ export class TicktComponent implements OnInit {
 total_bill
 ticketid
 bus
-seat
+seats_booked_array
 ticket
 res
 count1=0
@@ -23,12 +23,17 @@ isBusoperator:Boolean=false;
 Reservation:Boolean=false;
 user_reserve
   constructor(private service:BusticketService) { 
+
+    //Is this operator or user??logic
     if(sessionStorage.getItem('busopdata')){
       this.isBusoperator=true;
       console.log('this is bus operator');
       this.user_reserve=JSON.parse(sessionStorage.getItem('user_data'));
     }
+
+
     console.log('inside the constructor');
+
 
     //get user details-for user component
     if(!this.isBusoperator){
@@ -39,21 +44,21 @@ user_reserve
     }
     
     //getting seats
-    let seatlist =sessionStorage.getItem('seats')
-    this.seat=JSON.parse(seatlist);
-    console.log('seats array from session storage'+this.seat);
+    this.seats_booked_array=JSON.parse(sessionStorage.getItem('seats'));
+    console.log('seats array from session storage'+this.seats_booked_array);
 
     //getting bus details
-    let busdata=sessionStorage.getItem('busData')
-    this.bus=JSON.parse(busdata);
+    this.bus=JSON.parse(sessionStorage.getItem('busData'));
     console.log(this.bus);
 
     //calculate the bill
-    this.total_bill=this.bus.Ticket_price*this.seat.length
+    this.total_bill=this.bus.Ticket_price*this.seats_booked_array.length
 
 
     //generate ticket-id
     this.ticketid=this.generate_id(this.bus.Source,this.bus.Destination)
+
+    //ticket for bus operator
     if(this.isBusoperator){
       //for reservation
       this.ticket={
@@ -71,12 +76,14 @@ user_reserve
         Source:this.bus.Source,//11
         Destination:this.bus.Destination,//12
         Date:this.bus.Date,//13
-        Seats:this.seat,//14
+        Seats:this.seats_booked_array,//14
         Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     }
+
+    
     }else{
 
-      //for user
+      //ticket for bus operator
       this.ticket={
         ticketid:this.ticketid, //1       
         passenger_name:this.user.name,//2
@@ -92,9 +99,10 @@ user_reserve
         Source:this.bus.Source,//11
         Destination:this.bus.Destination,//12
         Date:this.bus.Date,//13
-        Seats:this.seat,//14
+        Seats:this.seats_booked_array,//14
         Status:"success" //15                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     } 
+
     }
   
   console.log('ticket'+this.ticket);
@@ -103,6 +111,8 @@ user_reserve
   ngOnInit(): void {
     
   }
+
+  //tp generate ticket id
   generate_id(a,b) {
     var c = a.slice(0, 3)+b.slice(0,3)
 
@@ -114,10 +124,12 @@ user_reserve
     // console.log("ticket id" + c)
     return c
   }
+
+//ticket booking  
 AddTicket(id){
-//service-1 :write code here to send a service to update ticket db 
-//service-2 :to update the seats in the bus.
-//service-3 :also should be added in passenger db service -3
+//service-1 :update ticket db.
+//service-2 :update the seats in the bus.
+//service-3 :ticket added in passenger db.
 
 // console.log('3 services here ');
 
@@ -130,7 +142,7 @@ this.service.addticket(this.ticket).subscribe((data)=>{
     // console.log('ticket added');
     this.count1++;
   }else{
-    alert('ticket not added.Please try again.');
+    alert('Ticket not added.Please try again.');
   }
 }) 
 
@@ -147,7 +159,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
     // console.log('Seats updated');
     this.count1++;
   }else{
-    alert('Seats not updated');
+    alert('Seats not updated in the Bus');
   }
 }) 
 
@@ -173,7 +185,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
       this.count1++;
       
     }else{
-      alert('ticket not added to user db');
+      alert("ticket not added to user's account");
     }
   }) 
   
@@ -181,7 +193,7 @@ this.service.updateSeats(this.updateseats).subscribe((data)=>{
 
 
   
-  document.getElementById(id).innerHTML='Paid'
+  document.getElementById(id).innerHTML='Paid';
   alert('Your ticket is booked.Click on view ticket to see your tickets(only users can view their tickets)');
 
 

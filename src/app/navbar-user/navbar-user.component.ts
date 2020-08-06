@@ -11,5 +11,7 @@ export class NavbarUserComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  reset(){
+    sessionStorage.clear();
+  }
 }

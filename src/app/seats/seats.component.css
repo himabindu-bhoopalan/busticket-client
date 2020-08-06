@@ -97,6 +97,7 @@ h4{
   display:flex;
   justify-content:center;
   margin-top:10px;
+  width:auto;
 }
 .colorgreen{
   background-color:green;
