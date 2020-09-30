@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class SigninComponent implements OnInit {
   signinForm
   category:any=['User','Bus Operator']
+  isLoading=false;
   constructor(private busservice:BusticketService,private router:Router) {
 
     //bus animation js code-start
@@ -27,7 +28,7 @@ export class SigninComponent implements OnInit {
   }
   signIn(){
     // console.log(this.signinForm.value);
-    
+    this.isLoading=!this.isLoading;
     let signin_data=[]
     let a={password:this.signinForm.value.password}
     signin_data.push(a)
@@ -61,9 +62,8 @@ export class SigninComponent implements OnInit {
 
     //service  
     this.busservice.user_sign_in(signin_data).subscribe((data)=>{
-    
      if(data.status==200){
-     
+      this.isLoading=!this.isLoading
 
        //routing to corresponding component and setting the data to session storage
        if(this.signinForm.value.category=="User"){

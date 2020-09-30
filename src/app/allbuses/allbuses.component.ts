@@ -12,12 +12,12 @@ data1
 
   constructor(private service:BusticketService) {
     this.service.buslist().subscribe((bus1)=>{
-      console.log('inside userlist method'+bus1);
-      console.dir(bus1);
+      // console.log('inside userlist method'+bus1);
+      // console.dir(bus1);
       this.busdata=bus1;
     })
   
-  
+
    }
 
   ngOnInit(): void {

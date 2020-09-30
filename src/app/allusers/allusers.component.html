@@ -39,15 +39,15 @@
   <tbody>
     
     <tr  *ngFor="let user of userdata;let j=index">
-    <span *ngIf="user.message==''||user.message==undefined">
+    <!-- <span *ngIf="user.message==''||user.message==undefined"> -->
       <td>{{user.name}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phnumber}}</td>
       <td>{{user.unique_id}}</td>
       <td>{{user.tickets.length}}</td>
       <td><button type="button" class="btn btn-dark" (click)="deleteUser(user._id)" 
-        data-toggle="modal" data-target="#exampleModal">Delete</button></td>
-    </span> 
+        data-toggle="modal" [disabled]="user.name==='hima'"data-target="#exampleModal">Delete</button></td>
+    <!-- </span>  -->
     </tr>
   
   </tbody>

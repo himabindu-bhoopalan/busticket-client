@@ -14,7 +14,10 @@ reasonForm
     this.service.userlist().subscribe((data)=>{
       console.log('inside userlist method'+data);
       console.dir(data.data);
-      this.userdata=data.data;
+      let allusers=data.data;
+      this.userdata=allusers.filter(function(){
+        return (allusers.message==''||allusers.message==undefined && allusers.name!=="hima")
+      })
     })
     this.reasonForm = new FormGroup({
       'reason':new FormControl('',Validators.required)
