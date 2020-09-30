@@ -44,6 +44,7 @@ category:any=['User','Bus Operator']
           alert("error");
         }else{
           alert('unexpected error occured.please try again.')
+        
         }
         
       })
@@ -51,14 +52,17 @@ category:any=['User','Bus Operator']
     }
     else{
       alert("please enter valid details.Category,name and password are mandatory fields")
-
+     
     }
   
-
+    location.reload();
   }
   changeCity(e) {
     this.category.setValue(e.target.value, {
       onlySelf: true
     })
+  }
+  reset(){
+    location.reload();
   }
 }
